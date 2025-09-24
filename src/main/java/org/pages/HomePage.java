@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.helpers.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HomePage extends BasePage {
-
     /**
      * Кнопка регистрации
      */
@@ -20,7 +20,7 @@ public class HomePage extends BasePage {
      *  Список курсов (под текстом Best Selenium Certification Course Online).
      */
     @FindBy(xpath = "//*[contains(@class, 'elementor-container elementor-column-gap-default')]")
-    WebElement courcesListContainer;
+    WebElement coursesListContainer;
 
     /**
      *  Кнопка навигации назад (под Most Popular Software Testing Courses).
@@ -43,18 +43,18 @@ public class HomePage extends BasePage {
         contactInfoHeader.isDisplayed();
         navigationItem.isDisplayed();
         registrationButton.isDisplayed();
-        courcesListContainer.isDisplayed();
+        coursesListContainer.isDisplayed();
         footer.isDisplayed();
     }
 
     /**
      * Блок с курсами (Most Popular Software Testing Courses)
      * - Получить класс изображения на первом слайде после клика по кнопке навигации вперёд
+     * @return String
      */
     public String checkNavButtonNext() {
-        navButtonNext.isDisplayed();
         WebElement slideOneImg = driver.findElement(By.cssSelector("#NjY4OjE0Mw\\=\\=-1"));
-        navButtonNext.click();
+        Wait.waitThenCLick(driver, navButtonNext);
         new WebDriverWait(driver, Duration.ofSeconds(10));
         return slideOneImg.getDomAttribute("class");
     }
@@ -62,11 +62,11 @@ public class HomePage extends BasePage {
     /**
      * Блок с курсами (Most Popular Software Testing Courses)
      * - Получить класс изображения на первом слайде после клика по кнопке навигации назад
+     * @return String
      */
     public String checkNavButtonPrev() {
-        navButtonPrev.isDisplayed();
         WebElement slideOneImg = driver.findElement(By.cssSelector("#NjY4OjE0Mw\\=\\=-1"));
-        navButtonPrev.click();
+        Wait.waitThenCLick(driver, navButtonPrev);
         new WebDriverWait(driver, Duration.ofSeconds(10));
         return slideOneImg.getDomAttribute("class");
     }

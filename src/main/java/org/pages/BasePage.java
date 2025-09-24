@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.helpers.Wait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,9 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-
     protected final WebDriver driver;
-
     /**
      * Хедер с контактной информацией
      */
@@ -24,6 +23,18 @@ public class BasePage {
      */
     @FindBy(xpath = "//*[contains(@class, 'ast-flex-grow-1 navigation-accessibility site-header-focus-item')]")
     WebElement navigationItem;
+
+    /**
+     * Выпадающее меню со всеми курсами
+     */
+    @FindBy(xpath = "//*[contains(@id, 'menu-item-27580')]")
+    WebElement allCoursesMenuItem;
+
+    /**
+     *  Кнопка перехода на страницу Lifetime membership club.
+     */
+    @FindBy(xpath = "//*[contains(@id, 'menu-item-27581')]")
+    WebElement toMembershipButton;
 
     /**
      * Футер
@@ -42,6 +53,7 @@ public class BasePage {
 
     /**
      * Получить текст из хедера с контактной информацией
+     * @return String
      */
     public String getInfoHeaderText() {
         contactInfoHeader.isDisplayed();
@@ -51,6 +63,7 @@ public class BasePage {
 
     /**
      * Получить текст из футера
+     * @return String
      */
     public String getFooterText() {
         footer.isDisplayed();
@@ -66,6 +79,25 @@ public class BasePage {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         new WebDriverWait(driver, Duration.ofSeconds(1000));
         navigationItem.isDisplayed();
+    }
+
+
+    /**
+     * Получить текущий URL
+     * @return String
+     */
+    public String getUrl() {
+        return driver.getCurrentUrl();
+    }
+
+    /**
+     * Переходит на страницу Lifetime membership club.
+     * @return текущий экземпляр класса
+     */
+    public MembershipPage goToMembershipPage() {
+        Wait.waitThenCLick(driver, allCoursesMenuItem);
+        Wait.waitThenCLick(driver, toMembershipButton);
+        return new MembershipPage(driver);
     }
 
 }

@@ -1,10 +1,12 @@
+import org.pages.MembershipPage;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class Way2automationTests extends BaseTest {
 
-    @Test(description = "Check info header")
-    public void basePageTest() {
+    @Test(description = "1.")
+    public void TestOne() {
         // Все основные элементы отображаются
         homePage.checkMainElements();
         SoftAssert softAssert = new SoftAssert();
@@ -19,13 +21,26 @@ public class Way2automationTests extends BaseTest {
         softAssert.assertNotEquals(homePage.checkNavButtonNext(), "lazyloaded");
         softAssert.assertEquals(homePage.checkNavButtonPrev(), "lazyloaded");
         // Футер отображается, содержит: адрес, номера телефонов и эмейлы
-        softAssert.assertTrue(homePage.getFooterText().indexOf("CDR Complex, 3rd Floor, Naya Bans Market, Sector 15, Noida, Near sec-16 Metro Station\n" +
-                "+91 97111-11-558\n" +
-                "+91 97111-91-558\n" +
-                "trainer@way2automation.com\n" +
-                "seleniumcoaching@gmail.com") != -1);
+        softAssert.assertTrue(homePage.getFooterText().contains("""
+                CDR Complex, 3rd Floor, Naya Bans Market, Sector 15, Noida, Near sec-16 Metro Station
+                +91 97111-11-558
+                +91 97111-91-558
+                trainer@way2automation.com
+                seleniumcoaching@gmail.com"""));
         softAssert.assertAll();
+    }
+
+    @Test(description = "2.", priority = 1)
+    public void TestTwo() {
         // Отображение меню при скроллинге страницы вниз: меню должно оставаться видимым после прокрутки страницы
         homePage.checkNavItemAfterScroll();
+    }
+
+    @Test(description = "3.", priority = 2)
+    public void TestThree() {
+        // Проверка перехода по меню навигации на другие страницы
+        MembershipPage membershipPage = homePage.goToMembershipPage();
+        Assert.assertEquals(membershipPage.getUrl(), "https://www.way2automation.com/lifetime-membership-club/");
+        Assert.assertEquals(membershipPage.getTitle(), "LIFETIME MEMBERSHIP CLUB");
     }
 }
