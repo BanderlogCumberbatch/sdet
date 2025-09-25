@@ -1,9 +1,12 @@
+import org.pages.LoggedPage;
+import org.pages.LoginPage;
 import org.pages.MembershipPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class Way2automationTests extends BaseTest {
+    LoginPage loginPage;
 
     @Test(description = "1.")
     public void TestOne() {
@@ -42,5 +45,25 @@ public class Way2automationTests extends BaseTest {
         MembershipPage membershipPage = homePage.goToMembershipPage();
         Assert.assertEquals(membershipPage.getUrl(), "https://www.way2automation.com/lifetime-membership-club/");
         Assert.assertEquals(membershipPage.getTitle(), "LIFETIME MEMBERSHIP CLUB");
+    }
+
+    @Test(description = "4.", priority = 3)
+    public void TestFour() {
+        // Проверка полей ввода
+        driver.get("https://www.way2automation.com/angularjs-protractor/registeration/#/login");
+        loginPage = new LoginPage(driver);
+        Assert.assertEquals(loginPage.getUsername(), "");
+        Assert.assertEquals(loginPage.getPassword(), "");
+        Assert.assertEquals(loginPage.getLoginButtonDisabled(), "true");
+        // Проверка успешной авторизации
+        LoggedPage loggedPage = loginPage.login("angular", "password", "***");
+        loggedPage.checkLogged();
+        // Проверка успешного разлогирования
+        loginPage = loggedPage.logout();
+        Assert.assertEquals(loginPage.getUsername(), "");
+        Assert.assertEquals(loginPage.getPassword(), "");
+        // Проверка авторизации с невалидными данными
+        loginPage.login("angular", "passwor", "***");
+        loginPage.checkInvalidAuth();
     }
 }

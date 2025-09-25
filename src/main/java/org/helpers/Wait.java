@@ -19,7 +19,7 @@ public class Wait {
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void waitThenCLick(WebDriver driver, WebElement element) {
+    public static void waitThenClick(WebDriver driver, WebElement element) {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOf(element))
                 .click();

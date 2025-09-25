@@ -7,9 +7,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseTest {
-
     WebDriver driver;
 
     HomePage homePage;
@@ -20,13 +21,16 @@ public class BaseTest {
     @BeforeClass
     void init(final ITestContext context) {
         int pageLoadTimeout = 10;
-
-        driver = new ChromeDriver(new ChromeOptions()
+        ChromeOptions options = new ChromeOptions()
                 .addArguments("--remote-allow-origins=*")
                 .addArguments("--disable-gpu")
                 .addArguments("--start-maximized")
-                .addArguments("--disable-dev-shm-usage"));
-
+                .addArguments("--disable-dev-shm-usage")
+                .addArguments("--disable-notifications");
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("profile.password_manager_leak_detection", false);
+        options.setExperimentalOption("prefs", prefs);
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts()
                 .pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
@@ -34,7 +38,6 @@ public class BaseTest {
         String webUrl = "https://www.way2automation.com/";
         driver.get(webUrl);
         homePage = new HomePage(driver);
-
     }
 
     /**

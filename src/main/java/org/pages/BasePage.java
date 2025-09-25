@@ -56,7 +56,7 @@ public class BasePage {
      * @return String
      */
     public String getInfoHeaderText() {
-        contactInfoHeader.isDisplayed();
+        Wait.waitUntilVisible(driver, contactInfoHeader);
         return contactInfoHeader.getText();
     }
 
@@ -66,7 +66,7 @@ public class BasePage {
      * @return String
      */
     public String getFooterText() {
-        footer.isDisplayed();
+        Wait.waitUntilVisible(driver, footer);
         return footer.getText();
     }
 
@@ -74,7 +74,7 @@ public class BasePage {
      * Проверка отображения меню при скроллинге страницы вниз
      */
     public void checkNavItemAfterScroll() {
-        navigationItem.isDisplayed();
+        Wait.waitUntilVisible(driver, navigationItem);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         new WebDriverWait(driver, Duration.ofSeconds(1000));
@@ -95,8 +95,8 @@ public class BasePage {
      * @return текущий экземпляр класса
      */
     public MembershipPage goToMembershipPage() {
-        Wait.waitThenCLick(driver, allCoursesMenuItem);
-        Wait.waitThenCLick(driver, toMembershipButton);
+        Wait.waitThenClick(driver, allCoursesMenuItem);
+        Wait.waitThenClick(driver, toMembershipButton);
         return new MembershipPage(driver);
     }
 

@@ -1,7 +1,6 @@
 package org.pages;
 
 import org.helpers.Wait;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,12 +33,19 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[contains(@class, 'pp-slider-arrow elementor-swiper-button-next swiper-button-next-c50f9f0')]")
     WebElement navButtonNext;
 
+    /**
+     *  Изображение на первом слайде блока с курсами (Most Popular Software Testing Courses).
+     */
+    @FindBy(css = "#NjY4OjE0Mw\\=\\=-1")
+    WebElement slideOneImg;
+
     public HomePage(WebDriver webDriver) { super(webDriver); }
 
     /**
      * Все основные элементы (хедер с контактной информацией, блок с навигацией, кнопка регистрации, список курсов (под текстом Best Selenium Certification Course Online), футер) отображаются.
      */
     public void checkMainElements() {
+        Wait.waitUntilVisible(driver, contactInfoHeader);
         contactInfoHeader.isDisplayed();
         navigationItem.isDisplayed();
         registrationButton.isDisplayed();
@@ -53,8 +59,7 @@ public class HomePage extends BasePage {
      * @return String
      */
     public String checkNavButtonNext() {
-        WebElement slideOneImg = driver.findElement(By.cssSelector("#NjY4OjE0Mw\\=\\=-1"));
-        Wait.waitThenCLick(driver, navButtonNext);
+        Wait.waitThenClick(driver, navButtonNext);
         new WebDriverWait(driver, Duration.ofSeconds(10));
         return slideOneImg.getDomAttribute("class");
     }
@@ -65,8 +70,7 @@ public class HomePage extends BasePage {
      * @return String
      */
     public String checkNavButtonPrev() {
-        WebElement slideOneImg = driver.findElement(By.cssSelector("#NjY4OjE0Mw\\=\\=-1"));
-        Wait.waitThenCLick(driver, navButtonPrev);
+        Wait.waitThenClick(driver, navButtonPrev);
         new WebDriverWait(driver, Duration.ofSeconds(10));
         return slideOneImg.getDomAttribute("class");
     }
