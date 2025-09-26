@@ -1,4 +1,4 @@
-package org.pages;
+package org.pages.login;
 
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Класс страницы для проверки авторизации
+ */
 public class LoginPage {
     protected final WebDriver driver;
 
@@ -77,6 +80,9 @@ public class LoginPage {
 
     /**
      * Производит авторизацию
+     * @param username логин
+     * @param password пароль
+     * @param usernameDesc ?
      * @return текущий экземпляр класса
      */
     public LoggedPage login(String username, String password, String usernameDesc) {

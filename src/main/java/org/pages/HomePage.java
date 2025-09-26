@@ -4,10 +4,11 @@ import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.concurrent.TimeUnit;
 
-import java.time.Duration;
-
+/**
+ * Класс начальной страницы для way2automation.com
+ */
 public class HomePage extends BasePage {
     /**
      * Кнопка регистрации
@@ -46,10 +47,10 @@ public class HomePage extends BasePage {
      */
     public void checkMainElements() {
         Wait.waitUntilVisible(driver, contactInfoHeader);
-        contactInfoHeader.isDisplayed();
-        navigationItem.isDisplayed();
-        registrationButton.isDisplayed();
-        coursesListContainer.isDisplayed();
+        Wait.waitUntilVisible(driver, contactInfoHeader);
+        Wait.waitUntilVisible(driver, navigationItem);
+        Wait.waitUntilVisible(driver, registrationButton);
+        Wait.waitUntilVisible(driver, coursesListContainer);
         footer.isDisplayed();
     }
 
@@ -60,7 +61,11 @@ public class HomePage extends BasePage {
      */
     public String checkNavButtonNext() {
         Wait.waitThenClick(driver, navButtonNext);
-        new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return slideOneImg.getDomAttribute("class");
     }
 
@@ -71,7 +76,11 @@ public class HomePage extends BasePage {
      */
     public String checkNavButtonPrev() {
         Wait.waitThenClick(driver, navButtonPrev);
-        new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return slideOneImg.getDomAttribute("class");
     }
 

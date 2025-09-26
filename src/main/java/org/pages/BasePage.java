@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
+/**
+ * Базовый класс страницы для way2automation.com
+ */
 public class BasePage {
     protected final WebDriver driver;
     /**
@@ -77,8 +77,7 @@ public class BasePage {
         Wait.waitUntilVisible(driver, navigationItem);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        new WebDriverWait(driver, Duration.ofSeconds(1000));
-        navigationItem.isDisplayed();
+        Wait.waitUntilVisible(driver, navigationItem);
     }
 
 

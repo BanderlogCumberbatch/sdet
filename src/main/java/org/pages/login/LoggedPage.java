@@ -1,4 +1,4 @@
-package org.pages;
+package org.pages.login;
 
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Класс страницы после успешной авторизации
+ */
 public class LoggedPage {
     protected final WebDriver driver;
 

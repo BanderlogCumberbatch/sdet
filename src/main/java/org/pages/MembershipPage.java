@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Класс страницы LIFETIME MEMBERSHIP CLUB для way2automation.com
+ */
 public class MembershipPage extends BasePage {
     /**
      * Заголовок
