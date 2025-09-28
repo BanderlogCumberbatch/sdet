@@ -21,25 +21,27 @@ public class Way2automationTests extends BaseTest {
 
     @Test(description = "1.", priority = 1)
     public void TestOne() {
+        SoftAssert softAssert = new SoftAssert();
         // 1.1 Все основные элементы отображаются
         homePage.checkMainElements();
         // 1.2 Хедер содержит номера телефонов, ссылку на skype, почту и ссылки на соц.сети.
-        Assert.assertTrue(homePage.getInfoHeaderText().contains("""
+        softAssert.assertTrue(homePage.getInfoHeaderText().contains("""
                 +919711-111-558
                 +919711-191-558
                 +1 646-480-0603
                 seleniumcoaching
                 trainer@way2automation.com"""), "Хедер не содержит номера телефонов, ссылку на skype, почту и ссылки на соц.сети.");
         // 1.3 Проверка кнопок навигации (вперед и назад): работают корректно (меняют слайды)
-        Assert.assertNotEquals(homePage.checkNavButtonNext(), "lazyloaded", "Кнопка навигации вперёд не работает");
-        Assert.assertEquals(homePage.checkNavButtonPrev(), "lazyloaded", "Кнопка навигации назад не работает");
+        softAssert.assertTrue(homePage.checkNavButtonNext(), "Кнопка навигации вперёд не работает");
+        softAssert.assertTrue(homePage.checkNavButtonPrev(), "Кнопка навигации назад не работает");
         // 1.4 Футер отображается, содержит: адрес, номера телефонов и эмейлы
-        Assert.assertTrue(homePage.getFooterText().contains("""
+        softAssert.assertTrue(homePage.getFooterText().contains("""
                 CDR Complex, 3rd Floor, Naya Bans Market, Sector 15, Noida, Near sec-16 Metro Station
                 +91 97111-11-558
                 +91 97111-91-558
                 trainer@way2automation.com
                 seleniumcoaching@gmail.com"""), "Футер не содержит адреса, номера телефонов и эмейлы");
+        softAssert.assertAll();
     }
 
     @Test(description = "2.", priority = 2)

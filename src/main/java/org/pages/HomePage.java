@@ -4,6 +4,8 @@ import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -38,7 +40,13 @@ public class HomePage extends BasePage {
      *  Изображение на первом слайде блока с курсами (Most Popular Software Testing Courses).
      */
     @FindBy(css = "#NjY4OjE0Mw\\=\\=-1")
-    WebElement slideOneImg;
+    WebElement slideFirstImg;
+
+    /**
+     *  Изображение на последнем слайде блока с курсами (Most Popular Software Testing Courses).
+     */
+    @FindBy(css = "#MTA4ODoxNTM\\=-1")
+    WebElement slideLastImg;
 
     public HomePage(WebDriver webDriver) { super(webDriver); }
 
@@ -56,32 +64,36 @@ public class HomePage extends BasePage {
 
     /**
      * Блок с курсами (Most Popular Software Testing Courses)
-     * - Получить класс изображения на первом слайде после клика по кнопке навигации вперёд
-     * @return String
+     * Проверяет работоспособность навигации вперёд
+     * @return true - навигация вперёд работает, false - нет
      */
-    public String checkNavButtonNext() {
+    public Boolean checkNavButtonNext() {
         Wait.waitThenClick(driver, navButtonNext);
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return slideOneImg.getDomAttribute("class");
+        String sld = slideFirstImg.getDomAttribute("class");
+        Wait.waitThenClick(driver, navButtonPrev);
+        return Objects.equals(sld, "nitro-lazy");
     }
 
     /**
      * Блок с курсами (Most Popular Software Testing Courses)
-     * - Получить класс изображения на первом слайде после клика по кнопке навигации назад
-     * @return String
+     * Проверяет работоспособность навигации назад
+     * @return true - навигация назад работает, false - нет
      */
-    public String checkNavButtonPrev() {
+    public Boolean checkNavButtonPrev() {
         Wait.waitThenClick(driver, navButtonPrev);
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return slideOneImg.getDomAttribute("class");
+        String sld = slideLastImg.getDomAttribute("class");
+        Wait.waitThenClick(driver, navButtonNext);
+        return Objects.equals(sld, "lazyloaded");
     }
 
 }
