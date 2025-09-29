@@ -8,6 +8,9 @@ import org.testng.asserts.SoftAssert;
 import utils.Finder;
 import utils.Generator;
 
+/**
+ * Класс тестов для way2automation.com
+ */
 public class Way2automationTests extends BaseTest {
     LoginPage loginPage;
     BankHomePage bankHomePage;
@@ -23,7 +26,7 @@ public class Way2automationTests extends BaseTest {
     public void TestOne() {
         SoftAssert softAssert = new SoftAssert();
         // 1.1 Все основные элементы отображаются
-        homePage.checkMainElements();
+        Assert.assertTrue(homePage.checkMainElements(), "Основные элементы не отображаются");
         // 1.2 Хедер содержит номера телефонов, ссылку на skype, почту и ссылки на соц.сети.
         softAssert.assertTrue(homePage.getInfoHeaderText().contains("""
                 +919711-111-558
@@ -47,7 +50,7 @@ public class Way2automationTests extends BaseTest {
     @Test(description = "2.", priority = 2)
     public void TestTwo() {
         // 2. Отображение меню при скроллинге страницы вниз: меню должно оставаться видимым после прокрутки страницы
-        homePage.checkNavItemAfterScroll();
+        Assert.assertTrue(homePage.checkNavItemAfterScroll(), "Меню навигации не отображается при скроллинге вниз");
     }
 
     @Test(description = "3.", priority = 3)
@@ -68,14 +71,14 @@ public class Way2automationTests extends BaseTest {
         Assert.assertEquals(loginPage.getLoginButtonDisabled(), "true", "Кнопка регистрации задизейблена");
         // 4.2 Проверка успешной авторизации
         LoggedPage loggedPage = loginPage.login("angular", "password", "***");
-        loggedPage.checkLogged();
-        // 4.3 Проверка успешного разлогирования
+        Assert.assertTrue(loggedPage.checkMessage("You're logged in!!"), "Ожидаемое сообщение не отображается");
+        // 4.4 Проверка успешного разлогирования
         loginPage = loggedPage.logout();
         Assert.assertEquals(loginPage.getUsername(), "", "Поле для ввода имени не пустое");
         Assert.assertEquals(loginPage.getPassword(), "", "Поле для ввода пароля не пустое");
-        // 4.4 Проверка авторизации с невалидными данными
+        // 4.3 Проверка авторизации с невалидными данными
         loginPage.login("angular", "passwor", "***");
-        loginPage.checkInvalidAuth();
+        Assert.assertEquals(loginPage.getInvalidAuthMessage(), "Username or password is incorrect", "Текст сообщения не совпадает");
     }
 
     @Test(description = "5.", priority = 5)

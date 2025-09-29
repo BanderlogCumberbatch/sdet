@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import java.util.stream.Collectors;
 
+/**
+ * Класс страницы с таблицей транзакций
+ */
 public class TransactionsPage extends BankBasePage {
     /**
      * Кнопка возвращения на страницу управления пользователя

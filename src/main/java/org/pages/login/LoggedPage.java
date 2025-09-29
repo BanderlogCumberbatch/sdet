@@ -1,6 +1,7 @@
 package org.pages.login;
 
 import org.helpers.Wait;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,12 +19,6 @@ public class LoggedPage {
     @FindBy(xpath = "//*[contains(@href, '#/login')]")
     WebElement logoutButton;
 
-    /**
-     * Сообщение об успешной авторизации
-     */
-    @FindBy(xpath = "(//p[text()=\"You're logged in!!\"])")
-    WebElement loggedMessage;
-
     public LoggedPage(final WebDriver webDriver) {
         try {
             PageFactory.initElements(webDriver, this);
@@ -34,10 +29,13 @@ public class LoggedPage {
     }
 
     /**
-     * Проверка отображения сообщения об успешной авторизации
+     * Проверка появления ожидаемого сообщения
+     * @param message Ожидаемое сообщение
+     * @return true - сообщение отображается, false - нет
      */
-    public void checkLogged() {
-        Wait.waitUntilVisible(driver, loggedMessage);
+    public Boolean checkMessage(String message) {
+        Wait.waitUntilVisible(driver, logoutButton);
+        return driver.findElement(By.xpath(String.format("(//p[text()=\"%s\"])", message))).isDisplayed();
     }
 
     /**

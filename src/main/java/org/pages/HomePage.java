@@ -4,9 +4,9 @@ import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Класс начальной страницы для way2automation.com
@@ -52,14 +52,17 @@ public class HomePage extends BasePage {
 
     /**
      * Все основные элементы (хедер с контактной информацией, блок с навигацией, кнопка регистрации, список курсов (под текстом Best Selenium Certification Course Online), футер) отображаются.
+     * @return true - все основные элементы отображаются, false - нет
      */
-    public void checkMainElements() {
-        Wait.waitUntilVisible(driver, contactInfoHeader);
-        Wait.waitUntilVisible(driver, contactInfoHeader);
-        Wait.waitUntilVisible(driver, navigationItem);
-        Wait.waitUntilVisible(driver, registrationButton);
-        Wait.waitUntilVisible(driver, coursesListContainer);
-        footer.isDisplayed();
+    public Boolean checkMainElements() {
+        List<WebElement> elements = Arrays.asList(contactInfoHeader, navigationItem, registrationButton, coursesListContainer, footer);
+        Wait.wait(1);
+        for (WebElement i : elements) {
+            if (!i.isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -69,11 +72,7 @@ public class HomePage extends BasePage {
      */
     public Boolean checkNavButtonNext() {
         Wait.waitThenClick(driver, navButtonNext);
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Wait.wait(1);
         String sld = slideFirstImg.getDomAttribute("class");
         Wait.waitThenClick(driver, navButtonPrev);
         return Objects.equals(sld, "nitro-lazy");
@@ -86,11 +85,7 @@ public class HomePage extends BasePage {
      */
     public Boolean checkNavButtonPrev() {
         Wait.waitThenClick(driver, navButtonPrev);
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Wait.wait(1);
         String sld = slideLastImg.getDomAttribute("class");
         Wait.waitThenClick(driver, navButtonNext);
         return Objects.equals(sld, "lazyloaded");

@@ -72,12 +72,13 @@ public class BasePage {
 
     /**
      * Проверка отображения меню при скроллинге страницы вниз
+     * @return true - меню отображается, false - нет
      */
-    public void checkNavItemAfterScroll() {
+    public Boolean checkNavItemAfterScroll() {
         Wait.waitUntilVisible(driver, navigationItem);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        Wait.waitUntilVisible(driver, navigationItem);
+        return navigationItem.isDisplayed();
     }
 
 

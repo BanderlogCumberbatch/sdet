@@ -95,9 +95,11 @@ public class LoginPage {
     }
 
     /**
-     * Проверка отображения сообщения о некорректных данных при авторизации
+     * Получить текст сообщения о некорректных данных при авторизации
+     * @return String
      */
-    public void checkInvalidAuth() {
+    public String getInvalidAuthMessage() {
         Wait.waitUntilVisible(driver, invalidAuthMessage);
+        return invalidAuthMessage.getText();
     }
 }

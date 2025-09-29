@@ -10,24 +10,24 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * Класс страницы со списком пользователей.
+ * Класс страницы с таблицей с данными всех пользователей
  */
 public class CustomersPage extends ManagerPage {
 
     /**
-     * Столбец таблицы с именами.
+     * Столбец таблицы с именами
      */
     @FindBy(xpath = "//table[contains(@class, 'table-bordered')]/tbody/tr/td[1]")
     WebElement productsName;
 
     /**
-     * Поле для ввода данных для поиска.
+     * Поле для ввода данных для поиска
      */
     @FindBy(css = "body > div.ng-scope > div > div.ng-scope > div > div.ng-scope > div > form > div > div > input")
     WebElement searchInput;
 
     /**
-     * Селектор выбирающий из таблицы первый и второй столбец(имя, фамилия).
+     * Селектор выбирающий из таблицы первый и второй столбец(имя, фамилия)
      */
     private final String productNamesSelector = "//table[contains(@class, 'table-bordered')]/tbody/tr[td[1] and td[2]]";
 
@@ -37,14 +37,14 @@ public class CustomersPage extends ManagerPage {
     private final String firstRowDataSelector = "//table[contains(@class, 'table-bordered')]/tbody/tr[1]";
 
     /**
-     * Селектор выбирающий из таблицы 5-й элемент строки (кнопку удаления) с определённым значением 1-го элемента (имя).
+     * Селектор выбирающий из таблицы 5-й элемент строки (кнопку удаления) с определённым значением 1-го элемента (имя)
      */
     private final String deleteButtonSelector = "//table[contains(@class, 'table-bordered')]/tbody/tr[td[1][text()='%s']]/td[5]/button";
 
     public CustomersPage(final WebDriver webDriver) { super(webDriver); }
 
     /**
-     * Возвращает имя пользователя с определённым именем.
+     * Возвращает имя пользователя с определённым именем
      * @param firstName имя пользователя
      * @return String имя пользователя
      */
@@ -79,7 +79,7 @@ public class CustomersPage extends ManagerPage {
     }
 
     /**
-     * Удаляет из таблицы пользователя с именем.
+     * Удаляет из таблицы пользователя с именем
      * @param firstName имя пользователя
      */
     public void deleteCustomerWithFirstName(String firstName) {

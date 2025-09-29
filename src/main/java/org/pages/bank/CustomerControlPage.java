@@ -4,7 +4,6 @@ import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Класс со страницей управления пользователя
@@ -112,11 +111,7 @@ public class CustomerControlPage extends BankBasePage {
      *  Подождать 1 секунду для проведения транзакции и перейти на страницу со списком транзакций
      */
     public TransactionsPage goToTransactionPage() {
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Wait.wait(1);
         Wait.waitThenClick(driver, transactionsButton);
         return new TransactionsPage(driver);
     }

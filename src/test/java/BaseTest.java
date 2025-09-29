@@ -10,9 +10,18 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Базовый класс тестов.
+ */
 public class BaseTest {
+    /**
+     * Веб-браузер.
+     */
     WebDriver driver;
 
+    /**
+     * Начальная страница.
+     */
     HomePage homePage;
 
     /**
@@ -24,7 +33,6 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions()
                 .addArguments("--remote-allow-origins=*")
                 .addArguments("--disable-gpu")
-                .addArguments("--start-maximized")
                 .addArguments("--disable-dev-shm-usage")
                 .addArguments("--disable-notifications");
         Map<String, Object> prefs = new HashMap<>();
