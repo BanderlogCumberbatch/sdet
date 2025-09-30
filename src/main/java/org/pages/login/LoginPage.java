@@ -4,13 +4,12 @@ import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.pages.BasePage;
 
 /**
  * Класс страницы для проверки авторизации
  */
-public class LoginPage {
-    protected final WebDriver driver;
+public class LoginPage extends BasePage {
 
     /**
      * Поле для ввода имени пользователя
@@ -42,14 +41,7 @@ public class LoginPage {
     @FindBy(xpath = "//*[contains(@ng-if, 'Auth.error')]")
     WebElement invalidAuthMessage;
 
-    public LoginPage(final WebDriver webDriver) {
-        try {
-            PageFactory.initElements(webDriver, this);
-            this.driver = webDriver;
-        } catch (IllegalStateException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public LoginPage(WebDriver webDriver) {super(webDriver);}
 
     /**
      * Получить текст из формы для ввода имени пользователя

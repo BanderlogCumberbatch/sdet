@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
@@ -46,11 +47,11 @@ public class OpenAccountPage extends ManagerPage {
      * Вход в аккаунт
      */
     public void openAccount() {
-        Wait.waitThenClick(driver, customerMenuItem);
-        Wait.waitThenClick(driver, optionMarySue);
-        Wait.waitThenClick(driver, currencyMenuItem);
-        Wait.waitThenClick(driver, optionDollar);
-        Wait.waitThenClick(driver, processButton);
+        ElementHelper.clickElement(driver, customerMenuItem);
+        ElementHelper.clickElement(driver, optionMarySue);
+        ElementHelper.clickElement(driver, currencyMenuItem);
+        ElementHelper.clickElement(driver, optionDollar);
+        ElementHelper.clickElement(driver, processButton);
         Alert alert = driver.switchTo().alert();
         Wait.waitUntilAlert(driver);
         alert.accept();

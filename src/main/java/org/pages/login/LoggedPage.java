@@ -1,32 +1,24 @@
 package org.pages.login;
 
+import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.pages.BasePage;
 
 /**
  * Класс страницы после успешной авторизации
  */
-public class LoggedPage {
-    protected final WebDriver driver;
-
+public class LoggedPage extends BasePage {
     /**
      * Кнопка разлогирования
      */
     @FindBy(xpath = "//*[contains(@href, '#/login')]")
     WebElement logoutButton;
 
-    public LoggedPage(final WebDriver webDriver) {
-        try {
-            PageFactory.initElements(webDriver, this);
-            this.driver = webDriver;
-        } catch (IllegalStateException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public LoggedPage(WebDriver webDriver) { super(webDriver); }
 
     /**
      * Проверка появления ожидаемого сообщения
@@ -43,7 +35,7 @@ public class LoggedPage {
      * @return текущий экземпляр класса
      */
     public LoginPage logout() {
-        Wait.waitThenClick(driver, logoutButton);
+        ElementHelper.clickElement(driver, logoutButton);
         return new LoginPage(driver);
     }
 }

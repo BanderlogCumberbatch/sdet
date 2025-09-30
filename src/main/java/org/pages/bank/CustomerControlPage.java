@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,17 +9,17 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Класс со страницей управления пользователя
  */
-public class CustomerControlPage extends BankBasePage {
+public class CustomerControlPage extends DefaultPage {
     /**
      * Приветственное сообщение
      */
-    @FindBy(css = "body > div.ng-scope > div > div.ng-scope > div > div:nth-child(1) > strong")
+    @FindBy(xpath = "//div[@class='borderM box padT20 ng-scope']/div/strong")
     WebElement welcomeMessage;
 
     /**
      * Баланс средств
      */
-    @FindBy(css = "body > div.ng-scope > div > div.ng-scope > div > div:nth-child(3) > strong:nth-child(2)")
+    @FindBy(xpath = "//div[@ng-hide='noAccount']/strong[2]")
     WebElement balance;
 
     /**
@@ -73,7 +74,7 @@ public class CustomerControlPage extends BankBasePage {
      * @param amount кол-во средств для совершения депозита
      */
     public void deposit(String amount) {
-        Wait.waitThenClick(driver, depositButton);
+        ElementHelper.clickElement(driver, depositButton);
         Wait.waitUntilVisible(driver, amountInput);
         amountInput.sendKeys(amount);
         submitButton.click();
@@ -84,7 +85,7 @@ public class CustomerControlPage extends BankBasePage {
      * @param amount кол-во средств для снятия
      */
     public void withdraw(String amount) {
-        Wait.waitThenClick(driver, withdrawlButton);
+        ElementHelper.clickElement(driver, withdrawlButton);
         Wait.waitUntilVisible(driver, amountInput);
         amountInput.sendKeys(amount);
         submitButton.click();
@@ -108,11 +109,11 @@ public class CustomerControlPage extends BankBasePage {
     }
 
     /**
-     *  Подождать 1 секунду для проведения транзакции и перейти на страницу со списком транзакций
+     *  Подождать 800 миллисекунд для проведения транзакции и перейти на страницу со списком транзакций
      */
     public TransactionsPage goToTransactionPage() {
-        Wait.wait(1);
-        Wait.waitThenClick(driver, transactionsButton);
+        Wait.wait(800);
+        ElementHelper.clickElement(driver, transactionsButton);
         return new TransactionsPage(driver);
     }
 

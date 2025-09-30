@@ -1,6 +1,6 @@
 package org.pages.bank;
 
-import org.helpers.Wait;
+import org.helpers.ElementHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Класс стартовой страницы Way2Automation Banking App
  */
-public class BankHomePage extends BankBasePage {
+public class StartPage extends DefaultPage {
     /**
      * Кнопка входа в качестве пользователя
      */
@@ -27,14 +27,14 @@ public class BankHomePage extends BankBasePage {
     @FindBy(xpath = "//*[contains(@href, 'https://www.way2automation.com/angularjs-protractor/banking/registrationform.html')]")
     WebElement sampleFormButton;
 
-    public BankHomePage(final WebDriver webDriver) {super(webDriver);}
+    public StartPage(final WebDriver webDriver) {super(webDriver);}
 
     /**
      * Переход на страницу менеджера
      * @return текущий экземпляр класса
      */
     public ManagerPage goToBankManagerPage() {
-        Wait.waitThenClick(driver, bankMangerLoginButton);
+        ElementHelper.clickElement(driver, bankMangerLoginButton);
         return new ManagerPage(driver);
     }
 
@@ -43,7 +43,7 @@ public class BankHomePage extends BankBasePage {
      * @return текущий экземпляр класса
      */
     public SampleFormPage goToSampleFormPage() {
-        Wait.waitThenClick(driver, sampleFormButton);
+        ElementHelper.clickElement(driver, sampleFormButton);
         return new SampleFormPage(driver);
     }
 
@@ -52,7 +52,7 @@ public class BankHomePage extends BankBasePage {
      * @return текущий экземпляр класса
      */
     public CustomerLoginPage goToCustomerLoginPage() {
-        Wait.waitThenClick(driver, customerLoginButton);
+        ElementHelper.clickElement(driver, customerLoginButton);
         return new CustomerLoginPage(driver);
     }
 }

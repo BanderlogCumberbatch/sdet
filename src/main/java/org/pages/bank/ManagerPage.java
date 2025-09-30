@@ -1,6 +1,6 @@
 package org.pages.bank;
 
-import org.helpers.Wait;
+import org.helpers.ElementHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Класс страницы менеджера Way2Automation Banking App
  */
-public class ManagerPage extends BankBasePage {
+public class ManagerPage extends DefaultPage {
     /**
      * Кнопка перехода на страницу добавления пользователя
      */
@@ -34,7 +34,7 @@ public class ManagerPage extends BankBasePage {
      * @return текущий экземпляр класса
      */
     public AddCustomerPage goToAddCustomerPage() {
-        Wait.waitThenClick(driver, addCustomerPageButton);
+        ElementHelper.clickElement(driver, addCustomerPageButton);
         return new AddCustomerPage(driver);
     }
 
@@ -43,7 +43,7 @@ public class ManagerPage extends BankBasePage {
      * @return текущий экземпляр класса
      */
     public OpenAccountPage goToOpenAccountPage() {
-        Wait.waitThenClick(driver, openAccountButton);
+        ElementHelper.clickElement(driver, openAccountButton);
         return new OpenAccountPage(driver);
     }
 
@@ -52,7 +52,7 @@ public class ManagerPage extends BankBasePage {
      * @return текущий экземпляр класса
      */
     public CustomersPage goToCustomersPage() {
-        Wait.waitThenClick(driver, customersButton);
+        ElementHelper.clickElement(driver, customersButton);
         return new CustomersPage(driver);
     }
 }

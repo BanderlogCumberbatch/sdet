@@ -1,7 +1,9 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.pages.HomePage;
+import org.pages.bank.*;
+import org.pages.login.LoginPage;
+import org.pages.site.HomePage;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -19,10 +21,16 @@ public class BaseTest {
      */
     WebDriver driver;
 
-    /**
-     * Начальная страница.
-     */
     HomePage homePage;
+    LoginPage loginPage;
+    StartPage startPage;
+    SampleFormPage sampleFormPage;
+    AddCustomerPage addCustomerPage;
+    OpenAccountPage openAccountPage;
+    CustomerLoginPage customerLoginPage;
+    CustomerControlPage customerControlPage;
+    TransactionsPage transactionsPage;
+    CustomersPage customersPage;
 
     /**
      * Действия при инициализации.

@@ -1,5 +1,6 @@
-package org.pages;
+package org.pages.site;
 
+import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,9 +10,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Класс начальной страницы для way2automation.com
+ * Класс стартовой страницы для way2automation.com
  */
-public class HomePage extends BasePage {
+public class HomePage extends NavigationPage {
     /**
      * Кнопка регистрации
      */
@@ -55,8 +56,8 @@ public class HomePage extends BasePage {
      * @return true - все основные элементы отображаются, false - нет
      */
     public Boolean checkMainElements() {
-        List<WebElement> elements = Arrays.asList(contactInfoHeader, navigationItem, registrationButton, coursesListContainer, footer);
-        Wait.wait(1);
+        Wait.waitUntilVisible(driver, contactInfoHeader);
+        List<WebElement> elements = Arrays.asList(navigationItem, registrationButton, coursesListContainer, footer);
         for (WebElement i : elements) {
             if (!i.isDisplayed()) {
                 return false;
@@ -71,10 +72,9 @@ public class HomePage extends BasePage {
      * @return true - навигация вперёд работает, false - нет
      */
     public Boolean checkNavButtonNext() {
-        Wait.waitThenClick(driver, navButtonNext);
-        Wait.wait(1);
+        ElementHelper.clickElement(driver, navButtonNext);
         String sld = slideFirstImg.getDomAttribute("class");
-        Wait.waitThenClick(driver, navButtonPrev);
+        ElementHelper.clickElement(driver, navButtonPrev);
         return Objects.equals(sld, "nitro-lazy");
     }
 
@@ -84,10 +84,9 @@ public class HomePage extends BasePage {
      * @return true - навигация назад работает, false - нет
      */
     public Boolean checkNavButtonPrev() {
-        Wait.waitThenClick(driver, navButtonPrev);
-        Wait.wait(1);
+        ElementHelper.clickElement(driver, navButtonPrev);
         String sld = slideLastImg.getDomAttribute("class");
-        Wait.waitThenClick(driver, navButtonNext);
+        ElementHelper.clickElement(driver, navButtonNext);
         return Objects.equals(sld, "lazyloaded");
     }
 

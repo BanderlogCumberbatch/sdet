@@ -1,6 +1,6 @@
 package org.pages.bank;
 
-import org.helpers.Wait;
+import org.helpers.ElementHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Класс страницы входа в качестве пользователя Way2Automation Banking App
  */
-public class CustomerLoginPage extends BankBasePage {
+public class CustomerLoginPage extends DefaultPage {
     /**
      * Выпадающее меню с выбором пользователя
      */
@@ -34,9 +34,9 @@ public class CustomerLoginPage extends BankBasePage {
      * @return текущий экземпляр класс
      */
     public CustomerControlPage customerLogin() {
-        Wait.waitThenClick(driver, customerMenuItem);
-        Wait.waitThenClick(driver, optionMarySue);
-        Wait.waitThenClick(driver, processButton);
+        ElementHelper.clickElement(driver, customerMenuItem);
+        ElementHelper.clickElement(driver, optionMarySue);
+        ElementHelper.clickElement(driver, processButton);
         return new CustomerControlPage(driver);
     }
 }

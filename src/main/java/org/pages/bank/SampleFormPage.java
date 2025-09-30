@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -108,7 +109,7 @@ public class SampleFormPage {
      */
     public void selectSportsHobby() {
         if (!sportsCheckbox.isSelected()) {
-            Wait.waitThenClick(driver, sportsCheckbox);
+            ElementHelper.clickElement(driver, sportsCheckbox);
         }
     }
 
@@ -116,7 +117,7 @@ public class SampleFormPage {
      * Нажать на кнопку регистрации
      */
     public void clickRegister() {
-        Wait.waitThenClick(driver, registerButton);
+        ElementHelper.clickElement(driver, registerButton);
     }
 
     /**
@@ -126,14 +127,5 @@ public class SampleFormPage {
     public String getSuccessMessageText() {
         Wait.waitUntilVisible(driver, successMessage);
         return successMessage.getText();
-    }
-
-    /**
-     * Перейти обратно на стартовую страницу
-     * @return текущий экземпляр класс
-     */
-    public BankHomePage backToStartPage() {
-        driver.navigate().back();
-        return new BankHomePage(driver);
     }
 }

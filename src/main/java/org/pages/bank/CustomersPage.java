@@ -1,13 +1,14 @@
 package org.pages.bank;
 
+import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Класс страницы с таблицей с данными всех пользователей
@@ -23,23 +24,25 @@ public class CustomersPage extends ManagerPage {
     /**
      * Поле для ввода данных для поиска
      */
-    @FindBy(css = "body > div.ng-scope > div > div.ng-scope > div > div.ng-scope > div > form > div > div > input")
+    @FindBy(xpath = "//*[contains(@class, 'input-group')]/input")
     WebElement searchInput;
 
     /**
-     * Селектор выбирающий из таблицы первый и второй столбец(имя, фамилия)
+     * Первый и второй столбец таблицы(имя, фамилия)
      */
-    private final String productNamesSelector = "//table[contains(@class, 'table-bordered')]/tbody/tr[td[1] and td[2]]";
+    @FindBy(xpath = "//table[contains(@class, 'table-bordered')]/tbody/tr[td[1] and td[2]]")
+    WebElement productNames;
 
     /**
-     * Селектор выбирающий из таблицы элемент первого столбца и второго столбца первой строки (имя, фамилия)
+     * Элемент первого столбца и второго столбца первой строки (имя, фамилия)
      */
-    private final String firstRowDataSelector = "//table[contains(@class, 'table-bordered')]/tbody/tr[1]";
+    @FindBy(xpath = "//table[contains(@class, 'table-bordered')]/tbody/tr[1]")
+    WebElement firstRowData;
 
     /**
      * Селектор выбирающий из таблицы 5-й элемент строки (кнопку удаления) с определённым значением 1-го элемента (имя)
      */
-    private final String deleteButtonSelector = "//table[contains(@class, 'table-bordered')]/tbody/tr[td[1][text()='%s']]/td[5]/button";
+    String deleteButtonSelector = "//table[contains(@class, 'table-bordered')]/tbody/tr[td[1][text()='%s']]/td[5]/button";
 
     public CustomersPage(final WebDriver webDriver) { super(webDriver); }
 
@@ -50,9 +53,7 @@ public class CustomersPage extends ManagerPage {
      */
     public final String getCustomerFirstName(String firstName) {
         Wait.waitUntilVisible(driver, productsName);
-        return driver
-                .findElements(By.xpath(productNamesSelector))
-                .stream()
+        return Stream.of(productNames)
                 .map(WebElement::getText)
                 .filter(s -> s.equals(firstName))
                 .collect(Collectors.joining(""));
@@ -66,14 +67,7 @@ public class CustomersPage extends ManagerPage {
     public String findCustomer(String customerData) {
         Wait.waitUntilVisible(driver, searchInput);
         searchInput.sendKeys(customerData);
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        return driver
-                .findElements(By.xpath(firstRowDataSelector))
-                .stream()
+        return Stream.of(firstRowData)
                 .map(WebElement::getText)
                 .collect(Collectors.joining(""));
     }
@@ -84,7 +78,7 @@ public class CustomersPage extends ManagerPage {
      */
     public void deleteCustomerWithFirstName(String firstName) {
         WebElement deleteButton = driver.findElement(By.xpath(String.format(deleteButtonSelector, firstName)));
-        Wait.waitThenClick(driver, deleteButton);
+        ElementHelper.clickElement(driver, deleteButton);
     }
 
     /**

@@ -1,16 +1,18 @@
 package org.pages.bank;
 
+import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Класс страницы с таблицей транзакций
  */
-public class TransactionsPage extends BankBasePage {
+public class TransactionsPage extends DefaultPage {
     /**
      * Кнопка возвращения на страницу управления пользователя
      */
@@ -30,9 +32,10 @@ public class TransactionsPage extends BankBasePage {
     WebElement sortByFirstNameButton;
 
     /**
-     * Селектор выбирающий из таблицы элемент второго столбца первой строки
+     * Элемент второго столбца первой строки
      */
-    private final String firstRowDataSelector = "//table[contains(@class, 'table-bordered')]/tbody/tr[1]/td[2]";
+    @FindBy(xpath = "//table[contains(@class, 'table-bordered')]/tbody/tr[1]/td[2]")
+    WebElement firstRowAmount;
 
     /**
      * Селектор выбирающий таблицу
@@ -46,10 +49,8 @@ public class TransactionsPage extends BankBasePage {
      * @return String
      */
     public final String getLastTransactionAmount() {
-        Wait.waitThenClick(driver, sortByFirstNameButton);
-        return driver
-                .findElements(By.xpath(firstRowDataSelector))
-                .stream()
+        ElementHelper.clickElement(driver, sortByFirstNameButton);
+        return Stream.of(firstRowAmount)
                 .map(WebElement::getText)
                 .collect(Collectors.joining(""));
     }
@@ -96,7 +97,7 @@ public class TransactionsPage extends BankBasePage {
      * Очистить все транзакции
      */
     public void resetTransactions() {
-        Wait.waitThenClick(driver, resetButton);
+        ElementHelper.clickElement(driver, resetButton);
     }
 
     /**
@@ -104,7 +105,7 @@ public class TransactionsPage extends BankBasePage {
      * @return текущий экземпляр класса
      */
     public CustomerControlPage goToCustomerPage() {
-        Wait.waitThenClick(driver, backButton);
+        ElementHelper.clickElement(driver, backButton);
         return new CustomerControlPage(driver);
     }
 }
