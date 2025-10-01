@@ -2,8 +2,11 @@ import io.qameta.allure.*;
 import org.pages.bank.*;
 import org.pages.login.LoggedPage;
 import org.pages.login.LoginPage;
+import org.pages.site.HomePage;
 import org.pages.site.MembershipPage;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.Finder;
@@ -13,6 +16,13 @@ import utils.Generator;
  * Класс тестов для way2automation.com
  */
 public class Way2automationTests extends BaseTest {
+
+    @BeforeMethod
+    public final void setup() {
+        String webUrl = "https://www.way2automation.com/";
+        driver.get(webUrl);
+        homePage = new HomePage(driver);
+    }
 
     @Test(description = "Тест сайта way2automation.com (проверка отображения основных элементов, содержания хедера и футера, функциональности кнопок навигации (блок с курсами Most Popular Software Testing Courses))", priority = 1)
     @Severity(value = SeverityLevel.NORMAL)
@@ -197,5 +207,13 @@ public class Way2automationTests extends BaseTest {
         customersPage.deleteCustomerWithFirstName("Mary");
         customersPage.eraseSearchInput();
         Assert.assertEquals(customersPage.getCustomerFirstName(marySue), "", "Мэри Сью не удалилась");
+    }
+
+    /**
+     * Действия после теста.
+     */
+    @AfterMethod
+    public final void clearCookies() {
+        driver.manage().deleteAllCookies();
     }
 }

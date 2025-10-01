@@ -94,7 +94,7 @@ public class SampleFormPage {
     }
 
     /**
-     * Заполнение форму данными
+     * Заполнить форму данными
      */
     @Step("Fill form")
     public void fillForm(String firstName, String lastName, String email, String password, String gender, String about) {

@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -16,5 +17,14 @@ public class BasePage {
         } catch (IllegalStateException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Получить текущий URL
+     * @return String
+     */
+    @Step("Get URL")
+    public String getUrl() {
+        return driver.getCurrentUrl();
     }
 }

@@ -28,7 +28,7 @@ public class LoggedPage extends BasePage {
      */
     @Step("Check message")
     public Boolean checkMessage(String message) {
-        Wait.waitUntilVisible(driver, logoutButton);
+        Wait.waitUntilVisible(driver, logoutButton, 2);
         return driver.findElement(By.xpath(String.format("(//p[text()=\"%s\"])", message))).isDisplayed();
     }
 
