@@ -26,7 +26,7 @@ public class DataProviderTest extends BaseTest {
     @Test(description = "Проверка авторизации на way2automation.com",dataProvider = "Login data")
     @Severity(value = SeverityLevel.NORMAL)
     @Epic(value = "Authorization")
-    @Features(value = {@Feature(value = "Check elements"), @Feature(value = "Login"), @Feature(value = "Logout")})
+    @Features(value = {@Feature(value = "Check elements"), @Feature(value = "Login")})
     @Story(value = "As user")
     public void AuthTest(String login, String password, String desc) {
         // Проверка полей ввода
