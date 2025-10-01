@@ -1,3 +1,4 @@
+import io.qameta.allure.*;
 import org.pages.bank.*;
 import org.pages.login.LoggedPage;
 import org.pages.login.LoginPage;
@@ -14,6 +15,10 @@ import utils.Generator;
 public class Way2automationTests extends BaseTest {
 
     @Test(description = "Тест сайта way2automation.com (проверка отображения основных элементов, содержания хедера и футера, функциональности кнопок навигации (блок с курсами Most Popular Software Testing Courses))", priority = 1)
+    @Severity(value = SeverityLevel.NORMAL)
+    @Epic(value = "UI")
+    @Feature(value = "Check elements")
+    @Story(value = "As user")
     public void TestOne() {
         SoftAssert softAssert = new SoftAssert();
         // 1.1 Все основные элементы отображаются
@@ -27,7 +32,7 @@ public class Way2automationTests extends BaseTest {
                 trainer@way2automation.com"""), "Хедер не содержит номера телефонов, ссылку на skype, почту и ссылки на соц.сети.");
         // 1.3 Проверка кнопок навигации (вперед и назад): работают корректно (меняют слайды)
         softAssert.assertTrue(homePage.checkNavButtonNext(), "Кнопка навигации вперёд не работает (блок с курсами Most Popular Software Testing Courses)");
-        softAssert.assertTrue(homePage.checkNavButtonPrev(), "Кнопка навигации назад не работает (блок с курсами Most Popular Software Testing Courses)");
+        softAssert.assertTrue(homePage.checkNavButtonBack(), "Кнопка навигации назад не работает (блок с курсами Most Popular Software Testing Courses)");
         // 1.4 Футер отображается, содержит: адрес, номера телефонов и эмейлы
         softAssert.assertTrue(homePage.getFooterText().contains("""
                 CDR Complex, 3rd Floor, Naya Bans Market, Sector 15, Noida, Near sec-16 Metro Station
@@ -39,12 +44,20 @@ public class Way2automationTests extends BaseTest {
     }
 
     @Test(description = "Отображение меню при скроллинге страницы вниз на сайте way2automation.com: меню должно оставаться видимым после прокрутки страницы", priority = 2)
+    @Severity(value = SeverityLevel.TRIVIAL)
+    @Epic(value = "UI")
+    @Feature(value = "Check elements")
+    @Story(value = "As user")
     public void TestTwo() {
         // 2. Отображение меню при скроллинге страницы вниз: меню должно оставаться видимым после прокрутки страницы
         Assert.assertTrue(homePage.checkNavItemAfterScroll(), "Меню навигации не отображается при скроллинге вниз");
     }
 
     @Test(description = "Проверка перехода по меню навигации на другие страницы на сайте way2automation.com", priority = 3)
+    @Severity(value = SeverityLevel.NORMAL)
+    @Epic(value = "UI")
+    @Feature(value = "Check elements")
+    @Story(value = "As user")
     public void TestThree() {
         // 3. Проверка перехода по меню навигации на другие страницы
         MembershipPage membershipPage = homePage.goToMembershipPage();
@@ -53,6 +66,10 @@ public class Way2automationTests extends BaseTest {
     }
 
     @Test(description = "Проверка авторизации на way2automation.com", priority = 4)
+    @Severity(value = SeverityLevel.NORMAL)
+    @Epic(value = "Authorization")
+    @Features(value = {@Feature(value = "Check elements"), @Feature(value = "Login"), @Feature(value = "Logout")})
+    @Story(value = "As user")
     public void TestFour() {
         // 4.1 Проверка полей ввода
         driver.get("https://www.way2automation.com/angularjs-protractor/registeration/#/login");
@@ -73,6 +90,10 @@ public class Way2automationTests extends BaseTest {
     }
 
     @Test(description = "Проверка формы регистрации Sample Form в банковском приложении way2automation.com", priority = 5)
+    @Severity(value = SeverityLevel.TRIVIAL)
+    @Epic(value = "Registration")
+    @Features(value = {@Feature(value = "Check elements"), @Feature(value = "Register")})
+    @Story(value = "As user")
     public void TestFivePointOne() {
         // 5.1 Перейти в интерфейс Sample Form
         driver.get("https://www.way2automation.com/angularjs-protractor/banking/#/login");
@@ -97,6 +118,10 @@ public class Way2automationTests extends BaseTest {
     }
 
     @Test(description = "Общая проверка функциональности банковского приложения way2automation.com", priority = 6)
+    @Severity(value = SeverityLevel.NORMAL)
+    @Epic(value = "User Management")
+    @Features(value = {@Feature(value = "Open account"), @Feature(value = "Login"), @Feature(value = "Deposit"), @Feature(value = "Withdraw"), @Feature(value = "Delete account")})
+    @Stories(value = {@Story(value = "As administrator"), @Story(value = "As user")})
     public void TestFivePointTwo() {
         // 5.2 Перейти в интерфейс Bank Manager Login
         driver.get("https://www.way2automation.com/angularjs-protractor/banking/#/login");

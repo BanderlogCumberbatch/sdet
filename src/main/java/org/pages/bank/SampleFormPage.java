@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
@@ -86,14 +87,16 @@ public class SampleFormPage {
      * Получить массив строк всех вариантов из чекбокса
      * @return String[]
      */
+    @Step("Get checkbox variants")
     public String[] getCheckboxVariants() {
         Wait.waitUntilVisible(driver, checkbox);
         return checkbox.getText().split(" ");
     }
 
     /**
-     * Заполнение формы данными
+     * Заполнение форму данными
      */
+    @Step("Fill form")
     public void fillForm(String firstName, String lastName, String email, String password, String gender, String about) {
         Wait.waitUntilVisible(driver, firstNameInput);
         firstNameInput.sendKeys(firstName);
@@ -107,6 +110,7 @@ public class SampleFormPage {
     /**
      * Выбрать хобби 'Sports' в чекбоксе
      */
+    @Step("Select sports hobby")
     public void selectSportsHobby() {
         if (!sportsCheckbox.isSelected()) {
             ElementHelper.clickElement(driver, sportsCheckbox);
@@ -116,6 +120,7 @@ public class SampleFormPage {
     /**
      * Нажать на кнопку регистрации
      */
+    @Step("Click register")
     public void clickRegister() {
         ElementHelper.clickElement(driver, registerButton);
     }
@@ -124,6 +129,7 @@ public class SampleFormPage {
      * Получить текст сообщения об успешной регистрации
      * @return String
      */
+    @Step("Get success message text")
     public String getSuccessMessageText() {
         Wait.waitUntilVisible(driver, successMessage);
         return successMessage.getText();

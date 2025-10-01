@@ -1,5 +1,6 @@
 package org.pages.site;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.JavascriptExecutor;
@@ -48,6 +49,7 @@ public class NavigationPage extends BasePage {
      * Получить текст из хедера с контактной информацией
      * @return String
      */
+    @Step("Get info header text")
     public String getInfoHeaderText() {
         Wait.waitUntilVisible(driver, contactInfoHeader);
         return contactInfoHeader.getText();
@@ -58,6 +60,7 @@ public class NavigationPage extends BasePage {
      * Получить текст из футера
      * @return String
      */
+    @Step("Get footer text")
     public String getFooterText() {
         Wait.waitUntilVisible(driver, footer);
         return footer.getText();
@@ -67,6 +70,7 @@ public class NavigationPage extends BasePage {
      * Проверка отображения меню при скроллинге страницы вниз
      * @return true - меню отображается, false - нет
      */
+    @Step("Check navigation item after scroll")
     public Boolean checkNavItemAfterScroll() {
         Wait.waitUntilVisible(driver, navigationItem);
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -79,6 +83,7 @@ public class NavigationPage extends BasePage {
      * Получить текущий URL
      * @return String
      */
+    @Step("Get URL")
     public String getUrl() {
         return driver.getCurrentUrl();
     }
@@ -87,6 +92,7 @@ public class NavigationPage extends BasePage {
      * Переходит на страницу Lifetime membership club.
      * @return текущий экземпляр класса
      */
+    @Step("Go to membership page")
     public MembershipPage goToMembershipPage() {
         ElementHelper.clickElement(driver, allCoursesMenuItem);
         ElementHelper.clickElement(driver, toMembershipButton);
@@ -97,6 +103,7 @@ public class NavigationPage extends BasePage {
      * Получить заголовок страницы
      * @return String
      */
+    @Step("Get title")
     public String getTitle() {
         return driver.getTitle();
     }

@@ -1,4 +1,5 @@
 package org.pages.bank;
+import io.qameta.allure.Step;
 import org.helpers.Wait;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
@@ -41,6 +42,7 @@ public class AddCustomerPage extends ManagerPage {
      * @param lastName Фамилия пользователя
      * @param postCode Почтовый код
      */
+    @Step("Add customer")
     public void addCustomer(String firstName, String lastName, String postCode) {
         Wait.waitUntilVisible(driver, firstNameInput);
         firstNameInput.sendKeys(firstName);

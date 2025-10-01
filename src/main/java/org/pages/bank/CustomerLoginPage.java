@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,7 @@ public class CustomerLoginPage extends DefaultPage {
      * Вход в качестве пользователя
      * @return текущий экземпляр класс
      */
+    @Step("Customer login")
     public CustomerControlPage customerLogin() {
         ElementHelper.clickElement(driver, customerMenuItem);
         ElementHelper.clickElement(driver, optionMarySue);

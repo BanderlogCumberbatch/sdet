@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.Alert;
@@ -46,6 +47,7 @@ public class OpenAccountPage extends ManagerPage {
     /**
      * Вход в аккаунт
      */
+    @Step("Open account")
     public void openAccount() {
         ElementHelper.clickElement(driver, customerMenuItem);
         ElementHelper.clickElement(driver, optionMarySue);

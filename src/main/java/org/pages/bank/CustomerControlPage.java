@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
@@ -64,6 +65,7 @@ public class CustomerControlPage extends DefaultPage {
      * Получить текст из приветственного сообщения
      * @return String
      */
+    @Step("Get welcome message text")
     public String getWelcomeMessageText() {
         Wait.waitUntilVisible(driver, welcomeMessage);
         return welcomeMessage.getText();
@@ -73,6 +75,7 @@ public class CustomerControlPage extends DefaultPage {
      * Совершить депозит
      * @param amount кол-во средств для совершения депозита
      */
+    @Step("Make a deposit")
     public void deposit(String amount) {
         ElementHelper.clickElement(driver, depositButton);
         Wait.waitUntilVisible(driver, amountInput);
@@ -84,6 +87,7 @@ public class CustomerControlPage extends DefaultPage {
      * Совершить снятие средств
      * @param amount кол-во средств для снятия
      */
+    @Step("Make a withdraw")
     public void withdraw(String amount) {
         ElementHelper.clickElement(driver, withdrawlButton);
         Wait.waitUntilVisible(driver, amountInput);
@@ -95,6 +99,7 @@ public class CustomerControlPage extends DefaultPage {
      * Появилось ли сообщение об успешной транзакции
      * @return Boolean
      */
+    @Step("Transaction message displayed check")
     public Boolean isTransactionMessageDisplayed() {
         return transactionMessage.isDisplayed();
     }
@@ -103,6 +108,7 @@ public class CustomerControlPage extends DefaultPage {
      * Получить сообщение об успешной транзакции
      * @return String
      */
+    @Step("Get transaction message text")
     public String getTransactionMessageText() {
         Wait.waitUntilVisible(driver, transactionMessage);
         return transactionMessage.getText();
@@ -111,6 +117,7 @@ public class CustomerControlPage extends DefaultPage {
     /**
      *  Подождать 800 миллисекунд для проведения транзакции и перейти на страницу со списком транзакций
      */
+    @Step("Go to transaction page")
     public TransactionsPage goToTransactionPage() {
         Wait.wait(800);
         ElementHelper.clickElement(driver, transactionsButton);
@@ -121,6 +128,7 @@ public class CustomerControlPage extends DefaultPage {
      * Получить баланс средств
      * @return int
      */
+    @Step("Get balance")
     public int getBalance() {
         Wait.waitUntilVisible(driver, balance);
         return Integer.parseInt(balance.getText());
