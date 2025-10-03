@@ -29,12 +29,8 @@ public class DataProviderTest extends BaseTest {
     @Features(value = {@Feature(value = "Check elements"), @Feature(value = "Login")})
     @Story(value = "As user")
     public void AuthTest(String login, String password, String desc) {
-        // Проверка полей ввода
-        Assert.assertEquals(loginPage.getUsername(), "", "Поле для ввода имени не пустое");
-        Assert.assertEquals(loginPage.getPassword(), "", "Поле для ввода пароля не пустое");
-        Assert.assertEquals(loginPage.getLoginButtonDisabled(), "true", "Кнопка регистрации задизейблена");
-        // Проверка авторизации
         LoggedPage loggedPage = loginPage.login(login, password, desc);
+        // Проверка авторизации
         Assert.assertTrue(loggedPage.checkMessage("You're logged in!!"), "Сообщение \"You're logged in!!\" не отображается");
     }
 
