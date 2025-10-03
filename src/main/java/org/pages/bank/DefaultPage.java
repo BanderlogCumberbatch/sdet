@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,7 @@ public class DefaultPage extends BasePage {
      * Переходит на стартовую страницу.
      * @return текущий экземпляр класса
      */
+    @Step("Go to home page")
     public StartPage goToHomePage() {
         ElementHelper.clickElement(driver, toStartPageButton);
         return new StartPage(driver);

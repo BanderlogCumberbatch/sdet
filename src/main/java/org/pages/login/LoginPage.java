@@ -1,5 +1,9 @@
 package org.pages.login;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,6 +51,7 @@ public class LoginPage extends BasePage {
      * Получить текст из формы для ввода имени пользователя
      * @return String
      */
+    @Step("Get username")
     public String getUsername() {
         Wait.waitUntilVisible(driver, usernameInput);
         return usernameInput.getText();
@@ -56,6 +61,7 @@ public class LoginPage extends BasePage {
      * Получить текст из формы для ввода пароля
      * @return String
      */
+    @Step("Get password")
     public String getPassword() {
         Wait.waitUntilVisible(driver, passwordInput);
         return passwordInput.getText();
@@ -65,6 +71,7 @@ public class LoginPage extends BasePage {
      * Получить свойство disabled кнопки авторизации
      * @return String
      */
+    @Step("Get login button disabled")
     public String getLoginButtonDisabled() {
         Wait.waitUntilVisible(driver, loginButton);
         return loginButton.getDomAttribute("disabled");
@@ -77,6 +84,10 @@ public class LoginPage extends BasePage {
      * @param usernameDesc ?
      * @return текущий экземпляр класса
      */
+    @Epic(value = "Authorization")
+    @Feature(value = "Login")
+    @Story(value = "As user")
+    @Step("Login")
     public LoggedPage login(String username, String password, String usernameDesc) {
         Wait.waitUntilVisible(driver, usernameInput);
         usernameInput.sendKeys(username);
@@ -90,6 +101,7 @@ public class LoginPage extends BasePage {
      * Получить текст сообщения о некорректных данных при авторизации
      * @return String
      */
+    @Step("Get invalid authorize message")
     public String getInvalidAuthMessage() {
         Wait.waitUntilVisible(driver, invalidAuthMessage);
         return invalidAuthMessage.getText();

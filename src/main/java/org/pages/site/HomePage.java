@@ -1,5 +1,6 @@
 package org.pages.site;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
@@ -55,6 +56,7 @@ public class HomePage extends NavigationPage {
      * Все основные элементы (хедер с контактной информацией, блок с навигацией, кнопка регистрации, список курсов (под текстом Best Selenium Certification Course Online), футер) отображаются.
      * @return true - все основные элементы отображаются, false - нет
      */
+    @Step("Check main elements")
     public Boolean checkMainElements() {
         Wait.waitUntilVisible(driver, contactInfoHeader);
         List<WebElement> elements = Arrays.asList(navigationItem, registrationButton, coursesListContainer, footer);
@@ -71,6 +73,7 @@ public class HomePage extends NavigationPage {
      * Проверяет работоспособность навигации вперёд
      * @return true - навигация вперёд работает, false - нет
      */
+    @Step("Check navigation next")
     public Boolean checkNavButtonNext() {
         ElementHelper.clickElement(driver, navButtonNext);
         String sld = slideFirstImg.getDomAttribute("class");
@@ -83,7 +86,8 @@ public class HomePage extends NavigationPage {
      * Проверяет работоспособность навигации назад
      * @return true - навигация назад работает, false - нет
      */
-    public Boolean checkNavButtonPrev() {
+    @Step("Check navigation back")
+    public Boolean checkNavButtonBack() {
         ElementHelper.clickElement(driver, navButtonPrev);
         String sld = slideLastImg.getDomAttribute("class");
         ElementHelper.clickElement(driver, navButtonNext);

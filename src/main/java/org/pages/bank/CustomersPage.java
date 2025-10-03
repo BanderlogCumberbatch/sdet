@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.By;
@@ -51,6 +52,7 @@ public class CustomersPage extends ManagerPage {
      * @param firstName имя пользователя
      * @return String имя пользователя
      */
+    @Step("Get customer first name")
     public final String getCustomerFirstName(String firstName) {
         Wait.waitUntilVisible(driver, productsName);
         return Stream.of(productNames)
@@ -64,6 +66,7 @@ public class CustomersPage extends ManagerPage {
      * @param customerData данные пользователя
      * @return текущий экземпляр класса
      */
+    @Step("Find customer")
     public String findCustomer(String customerData) {
         Wait.waitUntilVisible(driver, searchInput);
         searchInput.sendKeys(customerData);
@@ -76,6 +79,7 @@ public class CustomersPage extends ManagerPage {
      * Удаляет из таблицы пользователя с именем
      * @param firstName имя пользователя
      */
+    @Step("Delete customer")
     public void deleteCustomerWithFirstName(String firstName) {
         WebElement deleteButton = driver.findElement(By.xpath(String.format(deleteButtonSelector, firstName)));
         ElementHelper.clickElement(driver, deleteButton);
@@ -84,6 +88,7 @@ public class CustomersPage extends ManagerPage {
     /**
      * Очищает поле для поиска
      */
+    @Step("Erase search input")
     public void eraseSearchInput() {
         Wait.waitUntilVisible(driver, searchInput);
         searchInput.clear();

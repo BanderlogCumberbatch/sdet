@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,7 @@ public class ManagerPage extends DefaultPage {
      * Переходит на страницу добавления пользователя
      * @return текущий экземпляр класса
      */
+    @Step("Go to add customer page")
     public AddCustomerPage goToAddCustomerPage() {
         ElementHelper.clickElement(driver, addCustomerPageButton);
         return new AddCustomerPage(driver);
@@ -42,6 +44,7 @@ public class ManagerPage extends DefaultPage {
      * Переходит на страницу входа в аккаунт.
      * @return текущий экземпляр класса
      */
+    @Step("Go to open account page")
     public OpenAccountPage goToOpenAccountPage() {
         ElementHelper.clickElement(driver, openAccountButton);
         return new OpenAccountPage(driver);
@@ -51,6 +54,7 @@ public class ManagerPage extends DefaultPage {
      * Переходит на страницу со списком пользователей.
      * @return текущий экземпляр класса
      */
+    @Step("Go to customer page")
     public CustomersPage goToCustomersPage() {
         ElementHelper.clickElement(driver, customersButton);
         return new CustomersPage(driver);

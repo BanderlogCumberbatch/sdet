@@ -51,9 +51,6 @@ public class BaseTest {
         driver.manage().timeouts()
                 .pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
         context.setAttribute("driver", driver);
-        String webUrl = "https://www.way2automation.com/";
-        driver.get(webUrl);
-        homePage = new HomePage(driver);
     }
 
     /**

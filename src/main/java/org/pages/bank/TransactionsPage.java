@@ -1,5 +1,6 @@
 package org.pages.bank;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.By;
@@ -48,6 +49,7 @@ public class TransactionsPage extends DefaultPage {
      * Сортирует по возрастанию даты-времени и возвращает строку с данными второго столбца первой строки таблицы (средства последней совершённой транзакции)
      * @return String
      */
+    @Step("Get last transaction amount")
     public final String getLastTransactionAmount() {
         ElementHelper.clickElement(driver, sortByFirstNameButton);
         return Stream.of(firstRowAmount)
@@ -59,6 +61,7 @@ public class TransactionsPage extends DefaultPage {
      * Возвращает сумму всех средств.
      * @return List<String>
      */
+    @Step("Get amount sum")
     public final Double getAmountSum() {
         Wait.waitUntilVisible(driver, sortByFirstNameButton);
         return driver
@@ -89,6 +92,7 @@ public class TransactionsPage extends DefaultPage {
      * Подсчитывает общее количество операций в таблице транзакций
      * @return int
      */
+    @Step("Get transactions count")
     public final int getTransactionsCount() {
         return driver.findElements(By.xpath(tableSelector)).size();
     }
@@ -96,6 +100,7 @@ public class TransactionsPage extends DefaultPage {
     /**
      * Очистить все транзакции
      */
+    @Step("Reset transactions")
     public void resetTransactions() {
         ElementHelper.clickElement(driver, resetButton);
     }
@@ -104,6 +109,7 @@ public class TransactionsPage extends DefaultPage {
      * Перейти на страницу управления пользователя
      * @return текущий экземпляр класса
      */
+    @Step("Go to customer page")
     public CustomerControlPage goToCustomerPage() {
         ElementHelper.clickElement(driver, backButton);
         return new CustomerControlPage(driver);

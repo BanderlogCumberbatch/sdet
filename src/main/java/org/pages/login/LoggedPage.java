@@ -1,5 +1,6 @@
 package org.pages.login;
 
+import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.By;
@@ -25,8 +26,9 @@ public class LoggedPage extends BasePage {
      * @param message Ожидаемое сообщение
      * @return true - сообщение отображается, false - нет
      */
+    @Step("Check message")
     public Boolean checkMessage(String message) {
-        Wait.waitUntilVisible(driver, logoutButton);
+        Wait.waitUntilVisible(driver, logoutButton, 2);
         return driver.findElement(By.xpath(String.format("(//p[text()=\"%s\"])", message))).isDisplayed();
     }
 
@@ -34,6 +36,7 @@ public class LoggedPage extends BasePage {
      * Разлогиниться
      * @return текущий экземпляр класса
      */
+    @Step("Logout")
     public LoginPage logout() {
         ElementHelper.clickElement(driver, logoutButton);
         return new LoginPage(driver);
