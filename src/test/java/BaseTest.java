@@ -7,6 +7,8 @@ import org.pages.site.HomePage;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import utils.AllureTestListener;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import java.util.Map;
 /**
  * Базовый класс тестов.
  */
+@Listeners(AllureTestListener.class)
 public class BaseTest {
     /**
      * Веб-браузер.
@@ -58,4 +61,9 @@ public class BaseTest {
      */
     @AfterTest
     public final void tearDown() { driver.quit(); }
+
+    // Метод для получения драйвера (используется в listener)
+    public WebDriver getDriver() {
+        return driver;
+    }
 }
