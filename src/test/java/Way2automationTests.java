@@ -16,6 +16,16 @@ import utils.Generator;
  * Класс тестов для way2automation.com
  */
 public class Way2automationTests extends BaseTest {
+    HomePage homePage;
+    LoginPage loginPage;
+    StartPage startPage;
+    SampleFormPage sampleFormPage;
+    AddCustomerPage addCustomerPage;
+    OpenAccountPage openAccountPage;
+    CustomerLoginPage customerLoginPage;
+    CustomerControlPage customerControlPage;
+    TransactionsPage transactionsPage;
+    CustomersPage customersPage;
 
     @BeforeMethod
     public final void setup() {
