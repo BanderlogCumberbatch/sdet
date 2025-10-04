@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
+import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -105,5 +106,13 @@ public class LoginPage extends BasePage {
     public String getInvalidAuthMessage() {
         Wait.waitUntilVisible(driver, invalidAuthMessage);
         return invalidAuthMessage.getText();
+    }
+
+    /**
+     * Перевести фокус на поле ввода имени пользователя
+     */
+    @Step("Focus on username input")
+    public void focusOnUsernameInput() {
+        ElementHelper.clickElement(driver, usernameInput);
     }
 }

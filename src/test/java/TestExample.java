@@ -2,7 +2,6 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.AllureTestListener;
-
 import java.util.Objects;
 
 @Listeners(AllureTestListener.class)
