@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.1.dtd">
+<suite name="suite" parallel="methods" thread-count="2">
+    <test name="test suite">
+        <classes>
+            <class name="DataProviderTest"/>
+            <class name="JavaScriptExecutorTest"/>
+        </classes>
+    </test>
+</suite>
+
