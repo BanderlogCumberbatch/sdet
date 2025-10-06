@@ -3,6 +3,7 @@ package org.pages.sql;
 import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -80,6 +81,21 @@ public class HomePage extends BasePage {
     public Boolean verifyLoggedInState(String pseudonym) {
         Wait.waitUntilVisible(driver, logoutButton);
         return pseudonymElem.getText().equals(pseudonym);
+    }
+
+    /**
+     * Проверить состояние авторизации
+     * @return true - авторизован, false - нет
+     */
+    @Step("Verify logged in state")
+    public Boolean verifyLoggedInState() {
+        try {
+            Wait.waitUntilVisible(driver, logoutButton, 1);
+        }
+        catch (TimeoutException e) {
+            return false;
+        }
+        return logoutButton.isDisplayed();
     }
 
     /**

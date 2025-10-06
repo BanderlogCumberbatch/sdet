@@ -1,12 +1,13 @@
 import org.helpers.PropertyProvider;
 import org.pages.sql.HomePage;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import java.io.File;
 import static org.helpers.CookieHelper.loadCookiesFromFile;
 import static org.helpers.CookieHelper.saveCookiesToFile;
 
 public class CookieTest extends BaseTest {
-    private final File cookieFile = new File("cookies.data");
+    private final File cookieFile = new File("cookies.json");
 
     HomePage homePage = new HomePage(driver);
 
@@ -23,6 +24,7 @@ public class CookieTest extends BaseTest {
     @BeforeMethod
     public final void setup() {
         homePage = new HomePage(driver);
+        driver.get("https://www.sql-ex.ru/index.php");
     }
 
     /**
@@ -32,7 +34,6 @@ public class CookieTest extends BaseTest {
     public void authTest(String login, String password) {
         // Первый запуск - авторизация и сохранение cookies
         if (cookieFile.length() == 0) {
-            driver.get("https://www.sql-ex.ru/index.php");
             homePage.auth(login, password);
             saveCookiesToFile(driver, cookieFile);
         }
@@ -40,6 +41,7 @@ public class CookieTest extends BaseTest {
         else {
             loadCookiesFromFile(driver, cookieFile);
             driver.navigate().refresh(); // Обновляем страницу после загрузки cookies
+            Assert.assertTrue(homePage.verifyLoggedInState(), "Авторизации через куки не происходит");
         }
     }
 
@@ -47,9 +49,8 @@ public class CookieTest extends BaseTest {
      * Действия после теста.
      */
     @AfterMethod
-    public final void refreshAndClearCookies() {
+    public final void clearCookies() {
         driver.manage().deleteAllCookies();
-        driver.navigate().refresh();
     }
 
     /**
