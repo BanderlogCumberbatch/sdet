@@ -1,4 +1,4 @@
-package utils;
+package listener;
 import org.helpers.AllureHelper;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;

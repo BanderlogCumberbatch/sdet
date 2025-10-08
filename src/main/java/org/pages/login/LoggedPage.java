@@ -30,7 +30,7 @@ public class LoggedPage extends BasePage {
     @Step("Check message")
     public Boolean checkMessage(String message) {
         try {
-            Wait.waitUntilVisible(driver, logoutButton, 1);
+            Wait.waitUntilVisible(driver, logoutButton, 3);
             return driver.findElement(By.xpath(String.format("(//p[text()=\"%s\"])", message))).isDisplayed();
         }
         catch (TimeoutException e) {

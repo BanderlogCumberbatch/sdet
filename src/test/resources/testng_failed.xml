@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.1.dtd">
+<suite name="suite" parallel="methods" thread-count="1">
+    <listeners>
+        <listener class-name="listener.AnnotationTransformer"/>
+    </listeners>
+    <test name="test suite">
+        <classes>
+            <class name="DataProviderTest"/>
+        </classes>
+    </test>
+</suite>
