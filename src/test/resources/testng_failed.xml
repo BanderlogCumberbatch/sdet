@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.1.dtd">
 <suite name="suite" parallel="methods" thread-count="1">
     <listeners>
-        <listener class-name="listener.AnnotationTransformer"/>
+        <listener class-name="listeners.AnnotationTransformer"/>
     </listeners>
     <test name="test suite">
         <classes>
