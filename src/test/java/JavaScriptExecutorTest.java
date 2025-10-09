@@ -9,10 +9,14 @@ public class JavaScriptExecutorTest extends BaseTest {
     public void test() {
         driver.get("https://www.way2automation.com/angularjs-protractor/registeration/#/login");
         loginPage = new LoginPage(driver);
-        Assert.assertFalse(loginPage.checkHorizontalScroll() || loginPage.checkVerticalScroll(), "Ожидается отстуствие скролла на странице");
+        Boolean horizontalScroll = loginPage.checkHorizontalScroll();
+        Boolean verticalScroll = loginPage.checkVerticalScroll();
+        Assert.assertFalse(horizontalScroll || verticalScroll, "Ожидается отстуствие скролла на странице");
         loginPage.focusOnUsernameInput();
-        Assert.assertEquals(driver.switchTo().activeElement().getDomAttribute("ng-model"), "Auth.user.name", "Активный элемент не соответствует полю ввода");
+        String elementDomAttribute = driver.switchTo().activeElement().getDomAttribute("ng-model");
+        Assert.assertEquals(elementDomAttribute, "Auth.user.name", "Активный элемент не соответствует полю ввода");
         loginPage.unfocusActiveElement();
-        Assert.assertNotEquals(driver.switchTo().activeElement().getDomAttribute("ng-model"), "Auth.user.name", "Активный элемент соответствует полю ввода");
+        elementDomAttribute = driver.switchTo().activeElement().getDomAttribute("ng-model");
+        Assert.assertNotEquals(elementDomAttribute, "Auth.user.name", "Активный элемент соответствует полю ввода");
     }
 }
