@@ -13,7 +13,7 @@ public class CookieTest extends BaseTest {
     @DataProvider(name = "Login data")
     public Object[][] dpMethod() {
         return new Object[][]{
-                {PropertyProvider.getInstance().getProperty("secret.login"), PropertyProvider.getInstance().getProperty("secret.password")},
+                {PropertyProvider.getInstance().getProperty("sql.site.login"), PropertyProvider.getInstance().getProperty("sql.site.password")},
         };
     }
 
