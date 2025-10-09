@@ -1,5 +1,6 @@
 package grid;
 
+import org.helpers.PropertyProvider;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -20,7 +21,7 @@ public class BaseTest {
         capabilities.setPlatform(Platform.WIN11);
         capabilities.setBrowserName("chrome");
 
-        driver = new RemoteWebDriver(new URL("http://192.168.31.145:4444/"), capabilities);
+        driver = new RemoteWebDriver(new URL(PropertyProvider.getInstance().getProperty("grid.hub.url")), capabilities);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
