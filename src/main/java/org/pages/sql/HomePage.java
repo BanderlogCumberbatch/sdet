@@ -9,10 +9,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.BasePage;
 
+import java.io.File;
+
+import static org.helpers.CookieHelper.loadCookiesFromFile;
+import static org.helpers.CookieHelper.saveCookiesToFile;
+
 /**
  * Класс домашней страницы sql-ex.ru
  */
 public class HomePage extends BasePage {
+    /**
+     * Файл с куками
+     */
+    private final File cookieFile = new File("cookies.json");
+
     /**
      * Кнопка авторизации
      */
@@ -57,6 +67,22 @@ public class HomePage extends BasePage {
     @Step("Authorization without registration")
     public void authWithoutRegistrationButton() {
         ElementHelper.clickElement(driver, authWithoutRegistrationButton);
+    }
+
+    /**
+     * Авторизация с помощью куки
+     * @param login Логин
+     * @param password Пароль
+     */
+    @Step("Authorization with cookies")
+    public void authWithCookies(String login, String password) {
+        cookieFile.delete();
+        auth(login, password);
+        saveCookiesToFile(driver, cookieFile);
+        driver.manage().deleteAllCookies();
+        driver.get("https://www.sql-ex.ru/index.php");
+        loadCookiesFromFile(driver, cookieFile);
+        driver.navigate().refresh(); // Обновляем страницу после загрузки cookies
     }
 
     /**
