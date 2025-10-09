@@ -16,6 +16,16 @@ import utils.Generator;
  * Класс тестов для way2automation.com
  */
 public class Way2automationTests extends BaseTest {
+    HomePage homePage;
+    LoginPage loginPage;
+    StartPage startPage;
+    SampleFormPage sampleFormPage;
+    AddCustomerPage addCustomerPage;
+    OpenAccountPage openAccountPage;
+    CustomerLoginPage customerLoginPage;
+    CustomerControlPage customerControlPage;
+    TransactionsPage transactionsPage;
+    CustomersPage customersPage;
 
     @BeforeMethod
     public final void setup() {
@@ -61,6 +71,8 @@ public class Way2automationTests extends BaseTest {
     public void TestTwo() {
         // 2. Отображение меню при скроллинге страницы вниз: меню должно оставаться видимым после прокрутки страницы
         Assert.assertTrue(homePage.checkNavItemAfterScroll(), "Меню навигации не отображается при скроллинге вниз");
+        // Проверка скролла (U6)
+        Assert.assertTrue(homePage.checkVerticalScroll(), "Ожидается присутствие вертикального скролла на странице");
     }
 
     @Test(description = "Проверка перехода по меню навигации на другие страницы на сайте way2automation.com", priority = 3)

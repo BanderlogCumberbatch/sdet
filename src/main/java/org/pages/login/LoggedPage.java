@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.helpers.ElementHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,8 +29,13 @@ public class LoggedPage extends BasePage {
      */
     @Step("Check message")
     public Boolean checkMessage(String message) {
-        Wait.waitUntilVisible(driver, logoutButton, 2);
-        return driver.findElement(By.xpath(String.format("(//p[text()=\"%s\"])", message))).isDisplayed();
+        try {
+            Wait.waitUntilVisible(driver, logoutButton, 3);
+            return driver.findElement(By.xpath(String.format("(//p[text()=\"%s\"])", message))).isDisplayed();
+        }
+        catch (TimeoutException e) {
+            return false;
+        }
     }
 
     /**
