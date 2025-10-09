@@ -5,6 +5,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class DataProviderTest extends BaseTest {
+    LoginPage loginPage;
+
     @DataProvider(name = "Login data")
     public Object[][] dpMethod() {
         return new Object[][]{
