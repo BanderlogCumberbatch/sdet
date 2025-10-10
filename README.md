@@ -4,3 +4,4 @@
 * sql.site.login - ваш логин для авторизации на сайте www.sql-ex.ru
 * sql.site.password - ваш пароль  для авторизации на сайте www.sql-ex.ru 
 * browser - используемый браузер (chrome, firefox, edge, ie)
+
