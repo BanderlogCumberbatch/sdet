@@ -38,9 +38,7 @@ public class BrowserFactory {
                     driver = new EdgeDriver(edgeOptions);
                     break;
                 case "ie":
-                    DesiredCapabilities capabilities = new DesiredCapabilities();
-                    setIeCapabilities(capabilities);
-                    InternetExplorerOptions ieOptions = new InternetExplorerOptions(capabilities);
+                    InternetExplorerOptions ieOptions = new InternetExplorerOptions();
                     driver = new InternetExplorerDriver(ieOptions);
                     break;
             }
@@ -69,21 +67,11 @@ public class BrowserFactory {
                     break;
                 case "ie":
                     capabilities.setBrowserName("internet explorer");
-                    setIeCapabilities(capabilities);
                     driver = new RemoteWebDriver(new URL(PropertyProvider.getInstance().getProperty("grid.hub.url")), capabilities);
                     break;
             }
 
         }
         return driver;
-    }
-
-    private static void setIeCapabilities(DesiredCapabilities capabilities) {
-
-        capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-        capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-        capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
-
     }
 }
