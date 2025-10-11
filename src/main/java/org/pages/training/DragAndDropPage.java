@@ -23,6 +23,7 @@ public class DragAndDropPage extends BasePage {
      */
     public void dragAndDrop() {
         Wait.waitUntilVisible(driver, iframe);
+        // Переключить контекст
         driver.switchTo().frame(iframe);
         try {
             WebElement draggableElem = driver.findElement(By.id("draggable"));
