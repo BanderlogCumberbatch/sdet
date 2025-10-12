@@ -80,15 +80,6 @@ public class NavigationPage extends BasePage {
 
 
     /**
-     * Получить текущий URL
-     * @return String
-     */
-    @Step("Get URL")
-    public String getUrl() {
-        return driver.getCurrentUrl();
-    }
-
-    /**
      * Переходит на страницу Lifetime membership club.
      * @return текущий экземпляр класса
      */
