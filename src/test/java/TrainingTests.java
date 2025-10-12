@@ -28,7 +28,7 @@ public class TrainingTests extends BaseTest {
         framesAndWindowsPage.switchToIframe();
         framesAndWindowsPage.openNewTab();
         framesAndWindowsPage.openNewTab();
-        Integer actual = framesAndWindowsPage.getFramesCount();
+        Integer actual = framesAndWindowsPage.getTabsCount();
         Assert.assertEquals(actual, 3, "Открыто не 3 вкладки");
     }
 
@@ -38,7 +38,7 @@ public class TrainingTests extends BaseTest {
         alertsPage.getPage();
         String input = "Mary Sue";
         String actual = alertsPage.sendKeysToInputBox(input);
-        String expected = "Hello Mary Sue! How are you today?";
+        String expected = "Hello " + input + "! How are you today?";
         Assert.assertEquals(actual, expected, "Ожидаемый текст не совпадает");
     }
 
@@ -47,7 +47,7 @@ public class TrainingTests extends BaseTest {
         basicAuthPage = new BasicAuthPage(driver);
         basicAuthPage.getAuthorized();
         String actual = basicAuthPage.getImageLink();
-        Assert.assertNotNull(actual, "Изображение null");
+        Assert.assertNotNull(actual, "Ожидаемое изображение отсутствует (Авторизация не пройдена)");
     }
 
 }

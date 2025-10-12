@@ -1,10 +1,11 @@
 package org.pages.training;
 
+import org.helpers.ElementHelper;
+import org.helpers.FrameHelper;
 import org.helpers.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.pages.BasePage;
 
@@ -22,16 +23,11 @@ public class DragAndDropPage extends BasePage {
      * Перетащить draggable элемент в droppable
      */
     public void dragAndDrop() {
-        Wait.waitUntilVisible(driver, iframe);
-        // Переключить контекст
-        driver.switchTo().frame(iframe);
+        FrameHelper.switchToIframe(driver, iframe);
         try {
             WebElement draggableElem = driver.findElement(By.id("draggable"));
             WebElement droppableElem = driver.findElement(By.id("droppable"));
-            Wait.waitUntilVisible(driver, draggableElem);
-            Wait.waitUntilVisible(driver, droppableElem);
-            Actions actions = new Actions(driver);
-            actions.dragAndDrop(draggableElem, droppableElem).perform();
+            ElementHelper.dragAndDrop(driver, draggableElem, droppableElem);
         } finally {
             driver.switchTo().defaultContent();
         }
@@ -42,8 +38,7 @@ public class DragAndDropPage extends BasePage {
      * @return String
      */
     public String getDroppableText() {
-        Wait.waitUntilVisible(driver, iframe);
-        driver.switchTo().frame(iframe);
+        FrameHelper.switchToIframe(driver, iframe);
         try {
             WebElement droppableElem = driver.findElement(By.id("droppable"));
             Wait.waitUntilVisible(driver, droppableElem, 3);

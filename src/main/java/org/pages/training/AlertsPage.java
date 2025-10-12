@@ -1,8 +1,8 @@
 package org.pages.training;
 
+import org.helpers.AlertHelper;
 import org.helpers.ElementHelper;
-import org.helpers.Wait;
-import org.openqa.selenium.Alert;
+import org.helpers.FrameHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,25 +26,17 @@ public class AlertsPage extends BasePage {
     public AlertsPage(WebDriver webDriver) { super(webDriver); }
 
     /**
-     * Ввести кастомный тексты в Input Alert
+     * Ввести кастомный текст в Input Alert
      * @param text кастомный текст
      * @return текст появляющийся в результате
      */
     public String sendKeysToInputBox(String text) {
         ElementHelper.clickElement(driver, inputAlertButton);
-        Wait.waitUntilVisible(driver, iframe);
-        // Переключить контекст
-        driver.switchTo().frame(iframe);
+        FrameHelper.switchToIframe(driver, iframe);
         try {
-            WebElement elem = driver.findElement(By.xpath("(//button[@onclick='myFunction()'])"));
-
-            ElementHelper.clickElement(driver, elem);
-
-            Alert alert = driver.switchTo().alert();
-            Wait.waitUntilAlert(driver);
-            alert.sendKeys(text);
-            alert.accept();
-
+            WebElement openInputBoxButton = driver.findElement(By.xpath("(//button[@onclick='myFunction()'])"));
+            ElementHelper.clickElement(driver, openInputBoxButton);
+            AlertHelper.inputTextInAlert(driver, text);
             WebElement expectedElem = driver.findElement(By.xpath("(//p[@id='demo'])"));
             return expectedElem.getText();
         }
