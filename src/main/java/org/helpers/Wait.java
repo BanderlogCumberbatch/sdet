@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.Set;
+
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 
@@ -63,5 +65,25 @@ public class Wait {
     public static void waitUntilAlert(WebDriver driver, int timeoutSeconds) {
         new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
                 .until(ExpectedConditions.alertIsPresent());
+    }
+
+    /**
+     * Ожидание открытия вкладки (10 секунд)
+     * @param driver текущий веб-драйвер
+     * @param tabs набор текущих вкладок
+     */
+    public static void waitUntilNewTab(WebDriver driver, Set<String> tabs) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(d -> d.getWindowHandles().size() == tabs.size() + 1);
+    }
+
+    /**
+     * Ожидание открытия вкладки с настройкой времени
+     * @param driver текущий веб-драйвер
+     * @param tabs набор текущих вкладок
+     */
+    public static void waitUntilNewTab(WebDriver driver, Set<String> tabs, int timeoutSeconds) {
+        new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
+                .until(d -> d.getWindowHandles().size() == tabs.size() + 1);
     }
 }

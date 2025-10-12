@@ -11,7 +11,7 @@ import org.pages.BasePage;
 public class DragAndDropPage extends BasePage {
 
     /**
-     * Iframe элемент окна DragAndDrop
+     * Iframe элемент окна
      */
     @FindBy(xpath = "//*[contains(@class, 'demo-frame')]")
     WebElement iframe;
@@ -23,6 +23,7 @@ public class DragAndDropPage extends BasePage {
      */
     public void dragAndDrop() {
         Wait.waitUntilVisible(driver, iframe);
+        // Переключить контекст
         driver.switchTo().frame(iframe);
         try {
             WebElement draggableElem = driver.findElement(By.id("draggable"));
