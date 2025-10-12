@@ -1,0 +1,55 @@
+package org.pages.bank;
+import io.qameta.allure.Step;
+import org.helpers.AlertHelper;
+import org.helpers.Wait;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+/**
+ * Класс страницы для добавления пользователей в режиме менеджера Way2Automation Banking App
+ */
+public class AddCustomerPage extends ManagerPage {
+    /**
+     * Поле для ввода имени.
+     */
+    @FindBy(xpath = "//*[contains(@placeholder, 'First Name')]")
+    WebElement firstNameInput;
+
+    /**
+     * Поле для ввода фамилии.
+     */
+    @FindBy(xpath = "//*[contains(@placeholder, 'Last Name')]")
+    WebElement lastNameInput;
+
+    /**
+     * Поле для ввода почтового индекса.
+     */
+    @FindBy(xpath = "//*[contains(@placeholder, 'Post Code')]")
+    WebElement postCodeInput;
+
+    /**
+     * Кнопка перехода на страницу добавления пользователя.
+     */
+    @FindBy(xpath = "//*[contains(text(),'Add Customer') and contains(@class, 'btn btn-default')]")
+    WebElement addCustomerButton;
+
+    public AddCustomerPage(final WebDriver webDriver) {super(webDriver);}
+
+    /**
+     * Добавляет пользователя.
+     * @param firstName Имя пользователя
+     * @param lastName Фамилия пользователя
+     * @param postCode Почтовый код
+     */
+    @Step("Add customer")
+    public void addCustomer(String firstName, String lastName, String postCode) {
+        Wait.waitUntilVisible(driver, firstNameInput);
+        firstNameInput.sendKeys(firstName);
+        lastNameInput.sendKeys(lastName);
+        postCodeInput.sendKeys(postCode);
+        addCustomerButton.click();
+        AlertHelper.acceptAlert(driver);
+    }
+
+}

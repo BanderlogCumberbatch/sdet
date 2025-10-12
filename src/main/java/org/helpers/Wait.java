@@ -1,0 +1,89 @@
+package org.helpers;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+import java.util.Set;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+
+/**
+ * Класс ожиданий
+ */
+public class Wait {
+
+    /**
+     * Простое ожидание
+     * @param timeoutMilliseconds время ожидания в миллисекундах
+     */
+    public static void wait(int timeoutMilliseconds) {
+        try {
+            MILLISECONDS.sleep(timeoutMilliseconds);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Ожидание видимости веб-элемента (10 секунд)
+     * @param driver текущий веб-драйвер
+     * @param element веб-элемент
+     */
+    public static void waitUntilVisible(WebDriver driver, WebElement element) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(element));
+    }
+
+    /**
+     * Ожидание видимости веб-элемента с настройкой времени
+     * @param driver текущий веб-драйвер
+     * @param element веб-элемент
+     * @param timeoutSeconds время ожидания в секундах
+     */
+    public static void waitUntilVisible(WebDriver driver, WebElement element, int timeoutSeconds) {
+        new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
+                .until(ExpectedConditions.visibilityOf(element));
+    }
+
+    /**
+     * Ожидание появления алерта (10 секунд)
+     * @param driver текущий веб-драйвер
+     */
+    public static void waitUntilAlert(WebDriver driver) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.alertIsPresent());
+    }
+
+    /**
+     * Ожидание появления алерта с настройкой времени
+     * @param driver текущий веб-драйвер
+     * @param timeoutSeconds время ожидания в секундах
+     */
+    public static void waitUntilAlert(WebDriver driver, int timeoutSeconds) {
+        new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
+                .until(ExpectedConditions.alertIsPresent());
+    }
+
+    /**
+     * Ожидание открытия вкладки (10 секунд)
+     * @param driver текущий веб-драйвер
+     * @param tabs набор текущих вкладок
+     */
+    public static void waitUntilNewTab(WebDriver driver, Set<String> tabs) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(d -> d.getWindowHandles().size() == tabs.size() + 1);
+    }
+
+    /**
+     * Ожидание открытия вкладки с настройкой времени
+     * @param driver текущий веб-драйвер
+     * @param tabs набор текущих вкладок
+     */
+    public static void waitUntilNewTab(WebDriver driver, Set<String> tabs, int timeoutSeconds) {
+        new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
+                .until(d -> d.getWindowHandles().size() == tabs.size() + 1);
+    }
+}

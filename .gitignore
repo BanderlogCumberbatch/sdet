@@ -1,0 +1,5 @@
+target/
+.idea
+src/test/resources/env_local.properties
+allure-results
+cookies.json
