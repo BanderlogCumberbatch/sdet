@@ -18,7 +18,7 @@ public class AlertsPage extends BasePage {
     WebElement inputAlertButton;
 
     /**
-     * Iframe элемент окна DragAndDrop
+     * Iframe элемент окна
      */
     @FindBy(xpath = "//iframe[@src='alert/input-alert.html']")
     WebElement iframe;

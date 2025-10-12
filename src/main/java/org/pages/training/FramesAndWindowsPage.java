@@ -14,7 +14,7 @@ import java.util.Set;
 public class FramesAndWindowsPage extends BasePage {
 
     /**
-     * Iframe элемент окна DragAndDrop
+     * Iframe элемент окна
      */
     @FindBy(xpath = "//*[contains(@class, 'demo-frame')]")
     WebElement iframe;
