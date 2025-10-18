@@ -24,13 +24,10 @@ public class DragAndDropPage extends BasePage {
      */
     public void dragAndDrop() {
         FrameHelper.switchToIframe(driver, iframe);
-        try {
-            WebElement draggableElem = driver.findElement(By.id("draggable"));
-            WebElement droppableElem = driver.findElement(By.id("droppable"));
-            ElementHelper.dragAndDrop(driver, draggableElem, droppableElem);
-        } finally {
-            driver.switchTo().defaultContent();
-        }
+        WebElement draggableElem = driver.findElement(By.id("draggable"));
+        WebElement droppableElem = driver.findElement(By.id("droppable"));
+        ElementHelper.dragAndDrop(driver, draggableElem, droppableElem);
+        driver.switchTo().defaultContent();
     }
 
     /**
