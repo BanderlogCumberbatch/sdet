@@ -40,6 +40,7 @@ public class TrainingTests extends BaseTest {
         String actual = alertsPage.sendKeysToInputBox(input);
         String expected = "Hello " + input + "! How are you today?";
         Assert.assertEquals(actual, expected, "Ожидаемый текст не совпадает");
+
     }
 
     @Test(description = "Тест базовой аутентификация на httpwatch.com", priority = 4)
