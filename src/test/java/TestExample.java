@@ -1,10 +1,7 @@
 import org.testng.Assert;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import listeners.AllureTestListener;
 import java.util.Objects;
 
-@Listeners(AllureTestListener.class)
 public class TestExample extends BaseTest {
 
     @Test

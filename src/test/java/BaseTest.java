@@ -1,19 +1,19 @@
+import listeners.AllureTestListener;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import factory.BrowserFactory;
+import org.testng.annotations.Listeners;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Базовый класс тестов.
  */
 @Getter
+@Listeners(AllureTestListener.class)
 public class BaseTest {
     // Метод для получения драйвера (используется в listener)
     /**
@@ -27,15 +27,7 @@ public class BaseTest {
     @BeforeClass
     void init(final ITestContext context) {
         int pageLoadTimeout = 10;
-        ChromeOptions options = new ChromeOptions()
-                .addArguments("--remote-allow-origins=*")
-                .addArguments("--disable-gpu")
-                .addArguments("--disable-dev-shm-usage")
-                .addArguments("--disable-notifications");
-        Map<String, Object> prefs = new HashMap<>();
-        prefs.put("profile.password_manager_leak_detection", false);
-        options.setExperimentalOption("prefs", prefs);
-        driver = BrowserFactory.getDriver(options);
+        driver = BrowserFactory.getDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts()
                 .pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
