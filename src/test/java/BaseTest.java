@@ -35,7 +35,7 @@ public class BaseTest {
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("profile.password_manager_leak_detection", false);
         options.setExperimentalOption("prefs", prefs);
-        driver = BrowserFactory.getDriver();
+        driver = BrowserFactory.getDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts()
                 .pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));

@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -20,26 +21,27 @@ import java.net.URL;
 public class BrowserFactory {
     private static WebDriver driver;
 
-    public static WebDriver getDriver() {
+    /**
+     * Получить драйвер браузера, указанного в .properties
+     * @param driverOptions опции для браузера
+     * @return драйвер браузера
+     */
+    public static WebDriver getDriver(AbstractDriverOptions<?> driverOptions) {
         if (driver == null) {
             String browser = PropertyProvider.getInstance().getProperty("browser");
 
             switch (browser.toLowerCase()) {
                 case "firefox":
-                    FirefoxOptions ffOptions = new FirefoxOptions();
-                    driver = new FirefoxDriver(ffOptions);
+                    driver = new FirefoxDriver((FirefoxOptions) driverOptions);
                     break;
                 case "chrome":
-                    ChromeOptions chromeOptions = new ChromeOptions();
-                    driver = new ChromeDriver(chromeOptions);
+                    driver = new ChromeDriver((ChromeOptions) driverOptions);
                     break;
                 case "edge":
-                    EdgeOptions edgeOptions = new EdgeOptions();
-                    driver = new EdgeDriver(edgeOptions);
+                    driver = new EdgeDriver((EdgeOptions) driverOptions);
                     break;
                 case "ie":
-                    InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-                    driver = new InternetExplorerDriver(ieOptions);
+                    driver = new InternetExplorerDriver((InternetExplorerOptions) driverOptions);
                     break;
             }
 
@@ -47,6 +49,10 @@ public class BrowserFactory {
         return driver;
     }
 
+    /**
+     * Получить драйвер браузера для Selenium Grid, указанного в .properties
+     * @return драйвер Selenium Grid браузера
+     */
     public static WebDriver getGridDriver() throws MalformedURLException {
         if (driver == null) {
             String browser = PropertyProvider.getInstance().getProperty("browser");
