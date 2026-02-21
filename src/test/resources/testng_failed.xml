@@ -5,7 +5,7 @@
     </listeners>
     <test name="test suite">
         <classes>
-            <class name="DataProviderTest"/>
+            <class name="Way2automationTests"/>
         </classes>
     </test>
 </suite>

@@ -5,16 +5,16 @@
     <!-- Тесты на Chrome через Node 1 -->
     <test name="Chrome Tests - Node 1" parallel="methods" thread-count="2">
         <classes>
-            <class name="grid.DataProviderTestGrid"/>
-            <class name="grid.JavaScriptExecutorTestGrid"/>
+            <class name="grid.DataProviderGridGridTest"/>
+            <class name="grid.JavaScriptExecutorGridGridTest"/>
         </classes>
     </test>
 
     <!-- Тесты на Chrome через Node 2 -->
     <test name="Chrome Tests - Node 2" parallel="methods" thread-count="2">
         <classes>
-            <class name="grid.DataProviderTestGrid"/>
-            <class name="grid.JavaScriptExecutorTestGrid"/>
+            <class name="grid.DataProviderGridGridTest"/>
+            <class name="grid.JavaScriptExecutorGridGridTest"/>
         </classes>
     </test>
 

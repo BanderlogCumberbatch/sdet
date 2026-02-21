@@ -4,7 +4,7 @@ import org.pages.login.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class JavaScriptExecutorTestGrid extends BaseTest {
+public class JavaScriptExecutorGridGridTest extends BaseGridTest {
     LoginPage loginPage;
 
     @Test
