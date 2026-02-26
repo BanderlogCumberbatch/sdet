@@ -19,7 +19,7 @@ public class BaseTest {
     /**
      * Веб-браузер.
      */
-    WebDriver driver;
+    protected WebDriver driver;
 
     /**
      * Действия при инициализации.

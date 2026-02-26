@@ -31,7 +31,7 @@ public class BrowserFactory {
     public static WebDriver getDriver() {
 
         if (driver == null) {
-            String browser = PropertyProvider.getInstance().getProperty("browser");
+            String browser = PropertyProvider.getEnvLocalInstance().getProperty("browser");
 
             switch (browser.toLowerCase()) {
                 case "firefox":
@@ -69,28 +69,24 @@ public class BrowserFactory {
      */
     public static WebDriver getGridDriver() throws MalformedURLException {
         if (driver == null) {
-            String browser = PropertyProvider.getInstance().getProperty("browser");
+            String browser = PropertyProvider.getEnvLocalInstance().getProperty("browser");
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
             switch (browser.toLowerCase()) {
                 case "firefox":
                     capabilities.setBrowserName("firefox");
-                    driver = new RemoteWebDriver(new URL(PropertyProvider.getInstance().getProperty("grid.hub.url")), capabilities);
                     break;
                 case "chrome":
                     capabilities.setBrowserName("chrome");
-                    driver = new RemoteWebDriver(new URL(PropertyProvider.getInstance().getProperty("grid.hub.url")), capabilities);
                     break;
                 case "edge":
                     capabilities.setBrowserName("MicrosoftEdge");
-                    driver = new RemoteWebDriver(new URL(PropertyProvider.getInstance().getProperty("grid.hub.url")), capabilities);
                     break;
                 case "ie":
                     capabilities.setBrowserName("internet explorer");
-                    driver = new RemoteWebDriver(new URL(PropertyProvider.getInstance().getProperty("grid.hub.url")), capabilities);
                     break;
             }
-
+            driver = new RemoteWebDriver(new URL(PropertyProvider.getEnvLocalInstance().getProperty("grid.hub.url")), capabilities);
         }
         return driver;
     }
