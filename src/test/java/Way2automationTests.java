@@ -61,6 +61,7 @@ public class Way2automationTests extends BaseTest {
                 trainer@way2automation.com
                 seleniumcoaching@gmail.com"""), "Футер не содержит адреса, номера телефонов и эмейлы");
         softAssert.assertAll();
+
     }
 
     @Test(description = "Отображение меню при скроллинге страницы вниз на сайте way2automation.com: меню должно оставаться видимым после прокрутки страницы", priority = 2)

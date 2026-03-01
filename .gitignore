@@ -1,5 +1,9 @@
 target/
 .idea
 src/test/resources/env_local.properties
+src/test/resources/secrets.properties
 allure-results
 cookies.json
+src/test/java/grid/node2.log
+src/test/java/grid/node1.log
+src/test/java/grid/hub.log

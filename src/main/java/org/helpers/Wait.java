@@ -11,12 +11,11 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 
 /**
- * Класс ожиданий
+ * Класс ожиданий.
  */
 public class Wait {
-
     /**
-     * Простое ожидание
+     * Простое ожидание.
      * @param timeoutMilliseconds время ожидания в миллисекундах
      */
     public static void wait(int timeoutMilliseconds) {
@@ -28,17 +27,16 @@ public class Wait {
     }
 
     /**
-     * Ожидание видимости веб-элемента (10 секунд)
+     * Ожидание видимости веб-элемента (10 секунд).
      * @param driver текущий веб-драйвер
      * @param element веб-элемент
      */
     public static void waitUntilVisible(WebDriver driver, WebElement element) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOf(element));
+        waitUntilVisible(driver, element, 10);
     }
 
     /**
-     * Ожидание видимости веб-элемента с настройкой времени
+     * Ожидание видимости веб-элемента с настройкой времени.
      * @param driver текущий веб-драйвер
      * @param element веб-элемент
      * @param timeoutSeconds время ожидания в секундах
@@ -49,16 +47,15 @@ public class Wait {
     }
 
     /**
-     * Ожидание появления алерта (10 секунд)
+     * Ожидание появления алерта (10 секунд).
      * @param driver текущий веб-драйвер
      */
     public static void waitUntilAlert(WebDriver driver) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.alertIsPresent());
+        waitUntilAlert(driver, 10);
     }
 
     /**
-     * Ожидание появления алерта с настройкой времени
+     * Ожидание появления алерта с настройкой времени.
      * @param driver текущий веб-драйвер
      * @param timeoutSeconds время ожидания в секундах
      */
@@ -68,17 +65,16 @@ public class Wait {
     }
 
     /**
-     * Ожидание открытия вкладки (10 секунд)
+     * Ожидание открытия вкладки (10 секунд).
      * @param driver текущий веб-драйвер
      * @param tabs набор текущих вкладок
      */
     public static void waitUntilNewTab(WebDriver driver, Set<String> tabs) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(d -> d.getWindowHandles().size() == tabs.size() + 1);
+        waitUntilNewTab(driver, tabs, 10);
     }
 
     /**
-     * Ожидание открытия вкладки с настройкой времени
+     * Ожидание открытия вкладки с настройкой времени.
      * @param driver текущий веб-драйвер
      * @param tabs набор текущих вкладок
      */

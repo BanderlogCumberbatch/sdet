@@ -46,7 +46,7 @@ public class CookieHelper {
     }
 
     /**
-     * Вспомогательный класс для сериализации
+     * Вспомогательный класс для десериализации
      */
     static class DeserializableCookie {
         public String name;

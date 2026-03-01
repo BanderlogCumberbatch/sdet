@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import java.net.MalformedURLException;
 import java.time.Duration;
 
-public class BaseTest {
+public class BaseGridTest {
     protected WebDriver driver;
 
     @BeforeMethod

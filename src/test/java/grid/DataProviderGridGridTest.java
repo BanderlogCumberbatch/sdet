@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class DataProviderTestGrid extends BaseTest {
+public class DataProviderGridGridTest extends BaseGridTest {
     LoginPage loginPage;
 
     @DataProvider(name = "Login data")
